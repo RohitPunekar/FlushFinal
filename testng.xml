@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+
+<listeners>
+<listener class-name="com.Test.Listeners"/>
+</listeners>
+
+   
+  <test thread-count="10" name="HomepageTest">
+    <classes>
+      <class name="com.Test.HomepageTest"/>
+    </classes>
+  </test> 
+
+<test thread-count="10" name="DashboardPageTest">
+    <classes>
+      <class name="com.Test.DashBoardpageTestCases"/>
+    </classes>
+  </test> 
+
+<test thread-count="10" name="DiceGameTest">
+    <classes>
+     <class name="com.Test.DiceGameTestcases"/>
+    </classes>
+  </test> 
+
+<test thread-count="10" name="CrashGameTest">
+    <classes>
+     <class name="com.Test.CrashGameTestCases"/>
+    </classes>
+  </test> 
+
+<test thread-count="10" name="WheelGameTest">
+    <classes>
+     <class name="com.Test.WheelGameTestCases"/>
+    </classes>
+  </test>
+
+<test thread-count="10" name="MinesGameTest">
+    <classes>
+     <class name="com.Test.MinesGameTestCases"/>
+    </classes>
+  </test> 
+ 
+<test thread-count="10" name="PlinkoGameTest">
+    <classes>
+     <class name="com.Test.PlinkoGameTestCases"/>
+    </classes>
+  </test> 
+
+<test thread-count="10" name="AllFlowTest">
+    <classes>
+     <class name="com.Test.AllFlow"/>
+    </classes>
+  </test> 
+
+ <test thread-count="10" name="WalletModuleTest">
+    <classes>
+      <class name="com.Test.WalletModule"/>
+    </classes>
+  </test> <!-- Test -->
+
+<test thread-count="10" name="HomepageSidebarTest">
+    <classes>
+      <class name="com.Test.HomepageSidebar"/>
+    </classes>
+  </test> <!-- Test -->
+
+<test thread-count="10" name="HomepageFooterTest">
+    <classes>
+      <class name="com.Test.HomepageFooter"/>
+    </classes>
+  </test> <!-- Test -->
+
+
+</suite> <!-- Suite -->
