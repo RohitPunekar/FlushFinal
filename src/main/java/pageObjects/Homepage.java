@@ -116,7 +116,7 @@ public class Homepage {
 
 
 	public static WebElement FlushOriginalsHeader(WebDriver driver) {
-		return driver.findElement(By.xpath("(//*[@class='SearchCard__CardWrapper-sc-vsbs2e-0 iBOaPk'])[3]"));
+		return driver.findElement(By.xpath("(//*[@class='Sidebar__WrapEl-sc-nzv22c-4 dRnvSu'])[4]"));
 	}
 	public static WebElement FlushOriginalsViewAll(WebDriver driver) {
 		return driver.findElement(By.xpath("(//*[text()='View All'])[3]"));
@@ -133,7 +133,7 @@ public class Homepage {
 	}
 
 	public static WebElement LiveCasinoHeader(WebDriver driver) {
-		return driver.findElement(By.xpath("(//*[@class='Sidebar__UpperDiv-sc-nzv22c-3 dXuJQF'])/div[3]"));
+		return driver.findElement(By.xpath("(//*[@class='Sidebar__WrapEl-sc-nzv22c-4 dRnvSu'])[3]"));
 	}
 
 	public static WebElement FeaturedSlotsTab(WebDriver driver) {
@@ -141,7 +141,7 @@ public class Homepage {
 	}
 
 	public static WebElement FeaturedSlotsHeader(WebDriver driver) {
-		return driver.findElement(By.xpath("(//*[@class='Sidebar__UpperDiv-sc-nzv22c-3 dXuJQF'])/div[2]"));
+		return driver.findElement(By.xpath("(//*[@class='Sidebar__WrapEl-sc-nzv22c-4 dRnvSu'])[2]"));
 	}
 
 	public static WebElement FeaturedSlotsViewAll(WebDriver driver) {

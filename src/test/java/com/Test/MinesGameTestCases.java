@@ -309,7 +309,7 @@ public class MinesGameTestCases extends base {
 }
 	
 	@Test(enabled = true, priority = 4)
-	public void ErrorMessageForMaxAmount() throws Exception {
+	public void MinesErrorMessageForMaxAmount() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Betting with amount more than balance");
 
@@ -376,7 +376,7 @@ public class MinesGameTestCases extends base {
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("2.00000000");
+		Amount.sendKeys("90.00000000");
 		
 		log.info("Entering some Amount Successfully");
 		

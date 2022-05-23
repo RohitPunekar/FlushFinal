@@ -49,12 +49,6 @@
     </classes>
   </test> 
 
-<test thread-count="10" name="AllFlowTest">
-    <classes>
-     <class name="com.Test.AllFlow"/>
-    </classes>
-  </test> 
-
  <test thread-count="10" name="WalletModuleTest">
     <classes>
       <class name="com.Test.WalletModule"/>

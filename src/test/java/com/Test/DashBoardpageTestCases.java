@@ -297,7 +297,7 @@ public class DashBoardpageTestCases extends base {
 		log.info("Chatbox window is closed successfully");
 	}
 
-	@Test(enabled = true, priority = 6)
+	@Test(enabled = false, priority = 6)
 	public void changeLanguage() throws IOException {
 
 		wait = new WebDriverWait(driver, 50);

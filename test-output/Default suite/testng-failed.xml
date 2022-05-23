@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.Test.HomepageFooter">
+      <class name="com.Test.PlinkoGameTestCases">
         <methods>
-          <include name="initialize"/>
-          <include name="EndTest"/>
-          <include name="FooterLanguageIconSecondLang"/>
+          <include name="closeBrowser"/>
+          <include name="Initialization"/>
+          <include name="PlinkoGameBetFullFlowcheckingWithRiskMedium"/>
         </methods>
-      </class> <!-- com.Test.HomepageFooter -->
+      </class> <!-- com.Test.PlinkoGameTestCases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

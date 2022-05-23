@@ -45,7 +45,7 @@ public class HomepageTest extends base {
 		log.info("Browser invoked");
 	}
 
-	@Test(enabled = true, priority = 1)
+	@Test(enabled =  true, priority = 1)
 	public void LoginAsValidUser() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Login As Valid User");
@@ -88,7 +88,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 2)
+	@Test(enabled =  true, priority = 2)
 	public void InvalidUser() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("InvalidUser");
@@ -143,7 +143,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 3)
+	@Test(enabled =  true, priority = 3)
 	public void UserLogout() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("User Logout");
@@ -198,7 +198,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 4)
+	@Test(enabled =  true, priority = 4)
 	public void LoginWelcomeForgot() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Login Welcome Forgot");
@@ -261,7 +261,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 5)
+	@Test(enabled =  true, priority = 5)
 	public void RecoveryPasswordBackToLogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Recovery Password Back To Login");
@@ -306,7 +306,7 @@ public class HomepageTest extends base {
 	}
 
 
-	@Test(enabled = true, priority = 6)
+	@Test(enabled =  true, priority = 6)
 	public void LoginWelcomeRegistration() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Login Welcome Registration");
@@ -405,8 +405,8 @@ public class HomepageTest extends base {
 
 		log.info("Login button clicked successfully");
 
-		Thread.sleep(20000);
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("WelcomeGoogleIcon"))));
+		Thread.sleep(25000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("WelcomeGoogleIcon"))));
 
 		Actions action = new Actions(driver);
 
@@ -475,7 +475,7 @@ public class HomepageTest extends base {
 	}
 
 
-	@Test(enabled = true, priority = 8)
+	@Test(enabled =  true, priority = 8)
 	public void SignupLogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Signup Login");
@@ -530,7 +530,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 9)
+	@Test(enabled =  true, priority = 9)
 	public void Signup() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Signup Login");
@@ -589,7 +589,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 10)
+	@Test(enabled =  true, priority = 10)
 	public void SignupGoogleLogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Signup Google Login");
@@ -602,7 +602,7 @@ public class HomepageTest extends base {
 
 		log.info("Signup button clicked successfully");
 
-		Thread.sleep(15000);
+		Thread.sleep(25000);
 		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("WelcomeGoogleIcon"))));
 
 		Actions action = new Actions(driver);
@@ -671,7 +671,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 11)
+	@Test(enabled =  true, priority = 11)
 	public void JoinWithYourEmail() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Join With Your Email");
@@ -734,7 +734,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 12)
+	@Test(enabled =  true, priority = 12)
 	public void JoinEmailLogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Join Email Login");
@@ -787,7 +787,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 13)
+	@Test(enabled =  true, priority = 13)
 	public void JoinEmailGoogleLogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Join Email Google Login");
@@ -806,7 +806,7 @@ public class HomepageTest extends base {
 
 		log.info("Clicked on Join with your email");
 
-		Thread.sleep(15000);
+		Thread.sleep(25000);
 		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("WelcomeGoogleIcon"))));
 
 		WebElement Google = WelcomePopup.WelcomeGoogleIcon(driver);
@@ -887,7 +887,7 @@ public class HomepageTest extends base {
 
 
 
-	@Test(enabled = true, priority = 14)
+	@Test(enabled =  true, priority = 14)
 	public void Adminpanel() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Admin panel");
@@ -917,7 +917,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 15)
+	@Test(enabled =  true, priority = 15)
 	public void Dicegame() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Dice game");
@@ -958,7 +958,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 16)
+	@Test(enabled =  true, priority = 16)
 	public void DicegameLogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Dice game Login");
@@ -1015,7 +1015,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 17)
+	@Test(enabled =  true, priority = 17)
 	public void Crashgame() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Crashgame");
@@ -1058,7 +1058,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 18)
+	@Test(enabled =  true, priority = 18)
 	public void CrashgameLogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Crash game Login");
@@ -1128,7 +1128,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 19)
+	@Test(enabled =  true, priority = 19)
 	public void Minesgame() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines game");
@@ -1169,7 +1169,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 20)
+	@Test(enabled =  true, priority = 20)
 	public void Minesgamelogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines game login");
@@ -1226,7 +1226,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 21)
+	@Test(enabled =  true, priority = 21)
 	public void Wheelgame() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Wheel game");
@@ -1269,7 +1269,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 22)
+	@Test(enabled =  true, priority = 22)
 	public void Wheelgamelogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Wheel game login");
@@ -1352,7 +1352,7 @@ public class HomepageTest extends base {
 
 	/*
 
-	@Test(enabled = true, priority = 23)
+	@Test(enabled =  true, priority = 23)
 	public void Cashier() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Cashier");
@@ -1398,7 +1398,7 @@ public class HomepageTest extends base {
 
 	 */
 
-	@Test(enabled = true, priority = 24)
+	@Test(enabled =  true, priority = 24)
 	public void VIP() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("VIP");
@@ -1453,7 +1453,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 25)
+	@Test(enabled =  true, priority = 25)
 	public void Transaction() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Transaction");
@@ -1508,7 +1508,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 26)
+	@Test(enabled =  true, priority = 26)
 	public void TransactionPageTabsChecking() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Transaction Page Tabs Checking");
@@ -1595,7 +1595,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 27)
+	@Test(enabled =  true, priority = 27)
 	public void Statistics() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Statistics");
@@ -1650,7 +1650,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 28)
+	@Test(enabled =  true, priority = 28)
 	public void StatisticsPageChecking() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Statistics Page Checking");
@@ -1724,7 +1724,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 29)
+	@Test(enabled =  true, priority = 29)
 	public void Settings() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Settings");
@@ -1780,7 +1780,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 30)
+	@Test(enabled =  true, priority = 30)
 	public void ChangePassword() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Change Password");
@@ -1876,7 +1876,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 31)
+	@Test(enabled =  true, priority = 31)
 	public void PasswordCancel() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Password Cancel");
@@ -1957,7 +1957,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 32)
+	@Test(enabled =  true, priority = 32)
 	public void OldPasswordInvalid() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Old Password Invalid");
@@ -2053,7 +2053,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 33)
+	@Test(enabled =  true, priority = 33)
 	public void PasswordNotMatch() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Password Not Match");
@@ -2149,7 +2149,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 34)
+	@Test(enabled =  true, priority = 34)
 	public void WalletBalaceList() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Wallet Balace List");
@@ -2232,7 +2232,7 @@ public class HomepageTest extends base {
 		//VideoRecorder_utlity.stopRecord();
 	}
 
-	@Test(enabled = true, priority = 35)
+	@Test(enabled =  true, priority = 35)
 	public void ChangingUsername() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Changing Username");

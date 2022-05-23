@@ -578,7 +578,7 @@ public class CrashGameTestCases extends base {
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("2.00000100");
+		Amount.sendKeys("90.00000100");
 
 		log.info("Entering some Amount Successfully");
 

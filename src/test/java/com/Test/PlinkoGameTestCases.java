@@ -169,6 +169,9 @@ public class PlinkoGameTestCases extends base
 		
 		Thread.sleep(4000);
 		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.PlinkoProperty("PayoutPlinkoGame"))));
+		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
 		String PayoutAmt = Payout.getAttribute("innerText");
@@ -180,6 +183,9 @@ public class PlinkoGameTestCases extends base
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
 		System.out.println("PayoutAmount =" +PayoutAmount);
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.PlinkoProperty("WalletDropdown"))));
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
@@ -4099,7 +4105,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("2.00000100");
+		Amount.sendKeys("20.00000100");
 		
 		log.info("Entering some Amount Successfully");
 		
