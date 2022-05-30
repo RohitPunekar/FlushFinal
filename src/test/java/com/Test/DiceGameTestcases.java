@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -18,6 +19,8 @@ import org.testng.annotations.Test;
 
 import pageObjects.DiceGamePage;
 import pageObjects.Homepage;
+import pageObjects.MinesGamePage;
+import pageObjects.WelcomePopup;
 import resources.base;
 
 public class DiceGameTestcases extends base {
@@ -44,12 +47,8 @@ public class DiceGameTestcases extends base {
 	public void DiceGameBetFullFlowchecking() throws Exception {
 		
 		////VideoRecorder_utlity.startRecord("DiceGame Bet Full Flow checking");
-
-		Homepage page = new Homepage(driver);
-
+		
 		wait = new WebDriverWait(driver, 100);
-
-		//Homepage.Loginbutton(driver).click();
 		
 		try
 		{
@@ -67,19 +66,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
-		
-		log.info("Login Successfully with valid username and valid Password ");
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
 		Thread.sleep(2000);
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
 
 		log.info("Scrolling up to originals header");
 
@@ -91,10 +112,9 @@ public class DiceGameTestcases extends base {
 		DiceGamePage.diceLink(driver).click();
 		
 		log.info("Dice game link clicked successfully");
-
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[text()='Dice'])[1]")));
-
-		// Homepage.DiceGame(driver).click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.LoginProperty("WalletBalance"))));
 
 		WebElement Walletbalance = Homepage.WalletBalanceDropdown(driver);
 
@@ -122,11 +142,11 @@ public class DiceGameTestcases extends base {
 
 		log.info("Deleted default Amount Successfully");
 
-		Amount.sendKeys("0.0000100");
+		Amount.sendKeys("0.00000002");
 
 		log.info("Entering some Amount Successfully");
 
-		Double BetAmount = 0.0000100;
+		Double BetAmount = 0.00000002;
 
 		DiceGamePage.BetButton(driver).click();
 
@@ -259,11 +279,9 @@ public class DiceGameTestcases extends base {
 	}
 
 	@Test(enabled = true, priority = 2)
-	public void HalfAmount() throws Exception {
-		
+	public void HalfAmount() throws Exception 
+	{
 		////VideoRecorder_utlity.startRecord("Half Amount");
-
-		Homepage page = new Homepage(driver);
 
 		wait = new WebDriverWait(driver, 100);
 
@@ -285,18 +303,42 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 
 		log.info("Login Successfully with valid username and valid Password ");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
 
+		log.info("Scrolling up to originals header");
+		
 		Thread.sleep(4000);
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -305,10 +347,7 @@ public class DiceGameTestcases extends base {
 		DiceGamePage.diceLink(driver).click();
 		
 		log.info("Dice game link clicked successfully");
-
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[text()='Dice'])[1]")));
-
-		// Homepage.DiceGame(driver).click();
+		
 
 		WebElement Walletbalance = Homepage.WalletBalanceDropdown(driver);
 
@@ -326,9 +365,9 @@ public class DiceGameTestcases extends base {
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 
-		Double BetAmount = 0.00000100;
+		Double BetAmount = 0.00000002;
 
 		DiceGamePage.HalfAmount(driver).click();
 
@@ -378,17 +417,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Clicked on Login Button Successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		Thread.sleep(4000);
 
@@ -425,7 +488,7 @@ public class DiceGameTestcases extends base {
 
 		log.info("Deleted default amount successfully");
 
-		Amount.sendKeys("0.000000010");
+		Amount.sendKeys("0.00000002");
 
 		log.info("Entering some amount successfully");
 
@@ -433,7 +496,7 @@ public class DiceGameTestcases extends base {
 
 		log.info("2x Button clicked successfully");
 		
-		Double BetAmount = 0.000000020;
+		Double BetAmount = 0.00000004;
 
 		DiceGamePage.BetButton(driver).click();
 
@@ -513,8 +576,6 @@ public class DiceGameTestcases extends base {
 		
 		////VideoRecorder_utlity.startRecord("MAximum Error Message Checking");
 
-		Homepage page = new Homepage(driver);
-
 		wait = new WebDriverWait(driver, 100);
 
 		//Homepage.Loginbutton(driver).click();
@@ -535,17 +596,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Login Button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 
 		log.info("Login Successfully with valid username and valid Password ");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		Thread.sleep(4000);
 
@@ -593,9 +678,7 @@ public class DiceGameTestcases extends base {
 	public void DiceGameSetting() throws Exception {
 		
 		////VideoRecorder_utlity.startRecord("Dice Game Setting");
-
-		Homepage page = new Homepage(driver);
-
+		
 		wait = new WebDriverWait(driver, 100);
 
 		//Homepage.Loginbutton(driver).click();
@@ -616,17 +699,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Click on login button");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		Thread.sleep(4000);
 
@@ -642,20 +749,27 @@ public class DiceGameTestcases extends base {
 
 		DiceGamePage.DiceGameSettingICon(driver).click();
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.SettingsProperty("SettingsPopup"))));
+		boolean Result = DiceGamePage.SettingSoundButton(driver).isDisplayed();
 		
-		log.info("Dicegame Settings Popup is Visible Successfully");
+		System.out.println(Result);
 		
-		////VideoRecorder_utlity.stopRecord();
+		if(Result==true)
+		{
+			System.out.println("Sound button is Displayed");
+		}
+		else
+		{
+			System.out.println("Sound button is not Displayed");
+		}
+		
+		
+		//VideoRecorder_utlity.stopRecord();
 	}
 
 	@Test(enabled = true, priority = 6)
 	public void DiceGameRules() throws Exception {
 		
 		////VideoRecorder_utlity.startRecord("Dice Game Rules");
-
-		Homepage page = new Homepage(driver);
 
 		wait = new WebDriverWait(driver, 100);
 
@@ -677,17 +791,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Click on login button Successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		Thread.sleep(4000);
 
@@ -703,12 +841,15 @@ public class DiceGameTestcases extends base {
 		
 		DiceGamePage.DiceGameRulesICon(driver).click();
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.SettingsProperty("RulesPopup"))));
+		log.info("Dice game Rules Page is Visible Successfully");
 		
-		log.info("Dicegame Rules Page is Visible Successfully");
-
-		////VideoRecorder_utlity.stopRecord();
+		String Rules = DiceGamePage.DiceGameRulesPopUp(driver).getText();
+		
+		System.out.println(Rules);
+		
+		log.info("Dice Game Rules Pop Up Getting successfully");
+		
+		//VideoRecorder_utlity.stopRecord();
 	}
 
 	@Test(enabled = true, priority = 7)
@@ -716,8 +857,6 @@ public class DiceGameTestcases extends base {
 		
 		////VideoRecorder_utlity.startRecord("DiceGame Live Status Button");
 
-		Homepage page = new Homepage(driver);
-
 		wait = new WebDriverWait(driver, 100);
 
 		//Homepage.Loginbutton(driver).click();
@@ -738,17 +877,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Login button clicked Successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		Thread.sleep(4000);
 
@@ -759,17 +922,36 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Dice game link clicked successfully");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.FlushProperty("DiceGameLiveStatusIcon"))));
+		WebElement Amount = DiceGamePage.BetAmountinputField(driver);
+
+		Amount.sendKeys(Keys.CONTROL, "a");
+
+		log.info("Selecting all default Amount Successfully");
+
+		Amount.sendKeys(Keys.DELETE);
+
+		log.info("Deleted default Amount Successfully");
+
+		Amount.sendKeys("0.00000002");
+
+		log.info("Entering some Amount Successfully");
 
 		DiceGamePage.DiceGameLiveStatusIcon(driver).click();
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.SettingsProperty("LiveStatsPopup"))));
+		DiceGamePage.BetButton(driver).click();
+
+		log.info("Bet button clicked successfully");
 		
-        log.info("Dicegame Live Status Page is Visible Successfully");
+		Thread.sleep(6000);
+		
+		String ActText = DiceGamePage.DiceGameLiveStatsPopUp(driver).getText();
+		
+		System.out.println(ActText);
+		
+		log.info("Dice Game Live Stats Pop Up text Getting successfully");
+		
         
-        ////VideoRecorder_utlity.stopRecord();
+        //VideoRecorder_utlity.stopRecord();
 	}
 
 	@Test(enabled = true, priority = 8)
@@ -777,8 +959,6 @@ public class DiceGameTestcases extends base {
 		
 		////VideoRecorder_utlity.startRecord("DiceGame FairNess button");
 
-		Homepage page = new Homepage(driver);
-
 		wait = new WebDriverWait(driver, 100);
 
 		//Homepage.Loginbutton(driver).click();
@@ -799,17 +979,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Login button clicked Successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		Thread.sleep(4000);
 
@@ -820,12 +1024,75 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Dice game link clicked successfully");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.FlushProperty("DiceGameFairnessIcon"))));
+		WebElement Amount = DiceGamePage.BetAmountinputField(driver);
+
+		Amount.sendKeys(Keys.CONTROL, "a");
+
+		log.info("Selecting all default Amount Successfully");
+
+		Amount.sendKeys(Keys.DELETE);
+
+		log.info("Deleted default Amount Successfully");
+
+		Amount.sendKeys("0.00000002");
+
+		log.info("Entering some Amount Successfully");
+		
+		DiceGamePage.BetButton(driver).click();
+
+		log.info("Bet button clicked successfully");
+		
+		Thread.sleep(2000);
 
 		DiceGamePage.DiceGameFairnessIcon(driver).click();
 
 		log.info("Dicegame Fairness Page is Visible Successfully");
+		
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(f.LoginProperty("ChangeButton"))));
+		
+		DiceGamePage.DiceGameFairnessPopUp(driver).click();
+		
+		log.info("Dicegame Fairness Popup CHANGE button clicked Successfully");
+		
+		String ActiveServerSeed = DiceGamePage.DiceGameFairnessActiveServerSeed(driver).getAttribute("value");
+		
+		System.out.println("Activr server seed = "+ActiveServerSeed);
+		
+		String NextServerSeed = DiceGamePage.DiceGameFairnessNextServerSeed(driver).getAttribute("value");
+		
+		System.out.println("Next Server seed = "+NextServerSeed);
+		
+		DiceGamePage.DiceGameFairnessGoToTransaction(driver).click();
+		
+		log.info("Dicegame Fairness Popup 'Go To Transactions' button clicked Successfully");
+		
+		DiceGamePage.DiceGameFairnessTransactionsRow(driver).click();
+		
+		log.info("Dicegame Fairness Popup 'Transactions 1st row' button clicked Successfully");
+		
+		DiceGamePage.DiceGameFairnessVerifyBet(driver).click();
+		
+		log.info("Dicegame Fairness Popup 'Verify Bet' button clicked Successfully");
+		
+		String GameName = DiceGamePage.DiceGameFairnessGameTab(driver).getText();
+		
+		System.out.println("Game Name = "+GameName);
+		
+		log.info("Dicesgame Fairness Popup Game name getting Successfully");
+		
+		String Nonce = DiceGamePage.DiceGameFairnessNonceTab(driver).getAttribute("value");
+		
+		System.out.println("Nonce = "+Nonce);
+		
+		log.info("Dicegame Fairness Popup Nonce getting Successfully");
+		
+	     String ServerSeed = DiceGamePage.DiceGameFairnessServerSeedTab(driver).getAttribute("value");
+		
+		System.out.println("Server seed after Verification = "+ServerSeed);
+		
+		log.info("Dicegame Fairness Popup Server Seed getting Successfully");
+		
 		
 		////VideoRecorder_utlity.stopRecord();
 	}
@@ -834,8 +1101,6 @@ public class DiceGameTestcases extends base {
 	public void DiceGameAutoButtonTab() throws Exception {
 		
 		////VideoRecorder_utlity.startRecord("DiceGame Auto Button Tab");
-
-		Homepage page = new Homepage(driver);
 
 		wait = new WebDriverWait(driver, 100);
 
@@ -857,17 +1122,41 @@ public class DiceGameTestcases extends base {
 
 		log.info("Login Button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 		
 		Thread.sleep(4000);
 
@@ -895,11 +1184,11 @@ public class DiceGameTestcases extends base {
 
 		log.info("Deleted default amount successfully");
 
-		Amount.sendKeys("0.00001000");
+		Amount.sendKeys("0.00000002");
 
 		log.info("Entering some amount successfully");
 
-		Double BetAmount = 0.00001000;
+		Double BetAmount = 0.00000002;
 
 		DiceGamePage.AutoStartButton(driver).click();
 
@@ -922,8 +1211,6 @@ public class DiceGameTestcases extends base {
 		
 		////VideoRecorder_utlity.startRecord("DiceGame Auto Half Amount");
 
-		Homepage page = new Homepage(driver);
-
 		wait = new WebDriverWait(driver, 100);
 
 		//Homepage.Loginbutton(driver).click();
@@ -944,17 +1231,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Login Button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 		
 		Thread.sleep(4000);
 
@@ -982,7 +1293,7 @@ public class DiceGameTestcases extends base {
 
 		log.info("Deleted default Amount successfully");
 
-		Amount.sendKeys("0.00000010");
+		Amount.sendKeys("0.00000004");
 
 		log.info("Entering some amount successfully");
 		
@@ -1010,9 +1321,7 @@ public class DiceGameTestcases extends base {
 	public void DiceGameAutoDoubleAmount() throws Exception {
 		
 		////VideoRecorder_utlity.startRecord("DiceGame Auto Double Amount");
-
-		Homepage page = new Homepage(driver);
-
+		
 		wait = new WebDriverWait(driver, 100);
 
 		//Homepage.Loginbutton(driver).click();
@@ -1033,17 +1342,41 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Login Button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 		
 		Thread.sleep(4000);
 
@@ -1071,7 +1404,7 @@ public class DiceGameTestcases extends base {
 
 		log.info("Deleted default amount successfully");
 
-		Amount.sendKeys("0.00000010");
+		Amount.sendKeys("0.00000002");
 
 		log.info("Entering some amount successfully");
 		
@@ -1100,8 +1433,6 @@ public class DiceGameTestcases extends base {
 		
 		////VideoRecorder_utlity.startRecord("DiceGame Auto Number Of Bets Three");
 
-		Homepage page = new Homepage(driver);
-
 		wait = new WebDriverWait(driver, 100);
 
 		//Homepage.Loginbutton(driver).click();
@@ -1122,17 +1453,40 @@ public class DiceGameTestcases extends base {
 		
 		log.info("Login Button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 
 		log.info("Login Successfully with valid username and valid Password ");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserName"))));
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 		
 		Thread.sleep(4000);
 
@@ -1160,7 +1514,7 @@ public class DiceGameTestcases extends base {
 
 		log.info("Deleted default amount successfully");
 
-		Amount.sendKeys("0.00001000");
+		Amount.sendKeys("0.00000002");
 
 		log.info("Entering some amount successfully");
 		
@@ -1178,7 +1532,8 @@ public class DiceGameTestcases extends base {
 	@AfterMethod
 	public void EndTest() throws InterruptedException 
 	{
-		Thread.sleep(2000);
+		 Thread.sleep(2000);
+		
 		 driver.close();
 		 
 		 log.info("Browser closed");

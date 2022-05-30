@@ -8,7 +8,7 @@ public class VIPPage {
     
     public static WebElement DropdownVipLink(WebDriver driver)
     {
-        return driver.findElement(By.xpath("(//*[@class='UserDropdownMenu__DropdownItem-sc-qt4bc8-5 iLdCch'])[2]"));
+        return driver.findElement(By.xpath("(//*[@class='UserDropdownMenu__DropdownItem-sc-qt4bc8-5 bopkQd'])[2]"));
     } 
     public static WebElement Loyalitytext(WebDriver driver)
     {
@@ -109,7 +109,7 @@ public class VIPPage {
     
     public static WebElement TotalPointsSection(WebDriver driver)
     {
-        return driver.findElement(By.xpath("(//*[@class='Header__HeadEl2-sc-jdyd2k-3 zhmkJ'])[2]"));
+        return driver.findElement(By.xpath("(//*[@class='Header__HeadEl2-sc-jdyd2k-3 bkOOxd'])[2]"));
     } 
     
     public static WebElement ClaimRewardsChooseYourRewardFirstRadio(WebDriver driver)

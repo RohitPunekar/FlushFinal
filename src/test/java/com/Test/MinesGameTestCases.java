@@ -2,6 +2,7 @@ package com.Test;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -46,6 +47,8 @@ public class MinesGameTestCases extends base {
 	public void LoginAsValidUser() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Betting with Valid user");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 
 		wait = new WebDriverWait(driver, 50);
 
@@ -79,10 +82,30 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
 
@@ -124,7 +147,7 @@ public class MinesGameTestCases extends base {
 //			}
 //
 //		} catch (Exception e) {
-//			System.out.println("Elase condition ");
+//			System.out.println("Elapse condition ");
 //		}
 //
 		//VideoRecorder_utlity.stopRecord();
@@ -134,7 +157,9 @@ public class MinesGameTestCases extends base {
 	public void MinesGameBetAfterLogin() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Betting After Login");
-
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -165,9 +190,29 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
@@ -200,7 +245,7 @@ public class MinesGameTestCases extends base {
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000010");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -208,31 +253,31 @@ public class MinesGameTestCases extends base {
 		
 		log.info("Clicked on Mines Dropdown successfully ");
 		
-		MinesGamePage.MinesDropDown2(driver).click();
+		MinesGamePage.MinesDropDown5(driver).click();
 		
-		log.info("Clicked on Mines Dropdown 2 successfully ");
-		
-//		wait.until(ExpectedConditions
-//				.visibilityOfElementLocated(By.xpath(f.LoginProperty("Manual"))));
-		
+		log.info("Clicked on Mines Dropdown 5 successfully ");
+	
 		MinesGamePage.BetButton(driver).click();
 		
 		log.info("Clicked on BET button successfully");
 		
-		try {
+		try
+		{
 			WebElement displayed;
 
 			displayed = MinesGamePage.PickRandomTile(driver);
 
-			for (int i = 0; i < 24; i++) {
-
+			for (int i = 0; i < 24; i++) 
+			{
 				Thread.sleep(4000);
 
 				displayed.click();
 			}
 
-		} catch (Exception e) {
-			System.out.println("Elase condition ");
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("Elapse condition ");
 		}
 		
 		System.out.println("Test Case Passed");
@@ -244,7 +289,9 @@ public class MinesGameTestCases extends base {
 	public void MinesGameBetMaxAmount() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Betting with Max amount");
-
+	
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -275,9 +322,29 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
@@ -304,6 +371,12 @@ public class MinesGameTestCases extends base {
 		
 		System.out.println("Expected Text= "+ExpectedText);
 		
+		String MaxAmount = ExpectedText.replaceAll("[^0.0-9]","" );
+		
+		System.out.println("Expected Max Amount = "+MaxAmount);
+		
+		Assert.assertEquals(ActualText, MaxAmount,"Failed:Both the results are differernt");
+		
 		//VideoRecorder_utlity.stopRecord()
 		
 }
@@ -312,7 +385,9 @@ public class MinesGameTestCases extends base {
 	public void MinesErrorMessageForMaxAmount() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Betting with amount more than balance");
-
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -343,9 +418,29 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
@@ -386,7 +481,7 @@ public class MinesGameTestCases extends base {
 		
 		String ErrorMsg = MinesGamePage.ErrorMessage(driver).getText();
 		
-		System.out.println(ErrorMsg);
+		System.out.println("Error Message ="+ErrorMsg);
 		
 		//VideoRecorder_utlity.stopRecord()
 		
@@ -396,7 +491,9 @@ public class MinesGameTestCases extends base {
 	public void MinesGameBetWithHalfAmount() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Betting with half amount");
-
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -427,10 +524,30 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
 
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
 
@@ -460,7 +577,7 @@ public class MinesGameTestCases extends base {
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000004");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -494,7 +611,9 @@ public class MinesGameTestCases extends base {
 	public void MinesGameBetWithDoubleAmount() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Betting with Double amount");
-
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -525,9 +644,29 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
@@ -558,7 +697,7 @@ public class MinesGameTestCases extends base {
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -592,7 +731,9 @@ public class MinesGameTestCases extends base {
 	public void MinesGameSetting() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Setting");
-
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -623,9 +764,29 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
@@ -641,7 +802,6 @@ public class MinesGameTestCases extends base {
 		
 		log.info("Minesgame Settings Popup is Visible Successfully");
 		
-		
 		boolean Result = MinesGamePage.SettingSoundButton(driver).isDisplayed();
 		
 		System.out.println(Result);
@@ -655,16 +815,7 @@ public class MinesGameTestCases extends base {
 			System.out.println("Sound button is not Displayed");
 		}
 		
-		boolean Result1 = MinesGamePage.SettingGamesSidebarButton(driver).isDisplayed();
 		
-		if(Result1==true)
-		{
-			System.out.println("Games sidebar button is Displayed");
-		}
-		else
-		{
-			System.out.println("Games sidebar button is not Displayed");
-		}
 		//VideoRecorder_utlity.stopRecord();	
 }
 	
@@ -673,6 +824,8 @@ public class MinesGameTestCases extends base {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Rules");
 
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -703,9 +856,29 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
@@ -734,7 +907,9 @@ public class MinesGameTestCases extends base {
 	public void MinesGameLiveStats() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Live Stats");
-
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -765,9 +940,29 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
@@ -779,9 +974,56 @@ public class MinesGameTestCases extends base {
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath(f.LoginProperty("Manual"))));
 		
+		MinesGamePage.BetAmount(driver).click();
+		
+		log.info("Bet Amount input field clicked Successfully ");
+		
+		WebElement Amount = MinesGamePage.BetAmount(driver);
+		
+		Amount.sendKeys(Keys.CONTROL, "a");
+
+		Amount.sendKeys(Keys.DELETE);
+
+		Amount.sendKeys("0.00000002");
+		
+		log.info("Entering some Amount Successfully");
+		
+		MinesGamePage.MinesDropDown(driver).click();
+		
+		log.info("Clicked on Mines Dropdown successfully ");
+		
+		MinesGamePage.MinesDropDown5(driver).click();
+		
+		log.info("Clicked on Mines Dropdown 5 successfully ");
+		
 		MinesGamePage.MinesGameLiveStats(driver).click();
 		
 		log.info("Minesgame Live Stats Popup is Visible Successfully");
+	
+		MinesGamePage.BetButton(driver).click();
+		
+		log.info("Clicked on BET button successfully");
+		
+		try
+		{
+			WebElement displayed;
+
+			displayed = MinesGamePage.PickRandomTile(driver);
+
+			for (int i = 0; i < 24; i++) 
+			{
+				Thread.sleep(4000);
+
+				displayed.click();
+			}
+
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("Elapse condition ");
+		}
+		
+		Thread.sleep(6000);
 		
 		String ActText = MinesGamePage.MinesGameLiveStatsPopUp(driver).getText();
 		
@@ -796,7 +1038,9 @@ public class MinesGameTestCases extends base {
 	public void MinesGameFairnessIcon() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("Mines Games Fairness Icon");
-
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		wait = new WebDriverWait(driver, 50);
 		
 		try
@@ -827,9 +1071,29 @@ public class MinesGameTestCases extends base {
 
 		log.info("Clicked on Play Now button");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 		log.info("User login successful with valid username & password");
+		
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		Actions action = new Actions(driver);
+		
+		try
+		{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			action.moveToElement( OriginalsHeader).click().perform();
+		}
+		catch(Exception e)
+		{
+			driver.navigate().refresh();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(f.PlinkoProperty("OriginalHeader"))));
+			OriginalsHeader.click();
+		}
+
+		log.info("Scrolling up to originals header");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.LoginProperty("MinesLink"))));
@@ -858,7 +1122,7 @@ public class MinesGameTestCases extends base {
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000010");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -886,7 +1150,7 @@ public class MinesGameTestCases extends base {
 		} 
 		catch (Exception e) 
 		{
-			System.out.println("Elase condition ");
+			System.out.println("Elapse condition ");
 		}
 		
 		MinesGamePage.MinesGameFairnessIcon(driver).click();
@@ -902,11 +1166,11 @@ public class MinesGameTestCases extends base {
 		
 		String ActiveServerSeed = MinesGamePage.MinesGameFairnessActiveServerSeed(driver).getAttribute("value");
 		
-		System.out.println("Activr server seed ="+ActiveServerSeed);
+		System.out.println("Activr server seed = "+ActiveServerSeed);
 		
 		String NextServerSeed = MinesGamePage.MinesGameFairnessNextServerSeed(driver).getAttribute("value");
 		
-		System.out.println("Next Server seed ="+NextServerSeed);
+		System.out.println("Next Server seed = "+NextServerSeed);
 		
 		MinesGamePage.MinesGameFairnessGoToTransaction(driver).click();
 		
@@ -922,25 +1186,25 @@ public class MinesGameTestCases extends base {
 		
 		String GameName = MinesGamePage.MinesGameFairnessVerifyBetGame(driver).getText();
 		
-		System.out.println("Game Name ="+GameName);
+		System.out.println("Game Name = "+GameName);
 		
 		log.info("Minesgame Fairness Popup Game name getting Successfully");
 		
 		String Nonce = MinesGamePage.MinesGameFairnessVerifyBetNonce(driver).getAttribute("value");
 		
-		System.out.println("Nonce ="+Nonce);
+		System.out.println("Nonce = "+Nonce);
 		
 		log.info("Minesgame Fairness Popup Nonce getting Successfully");
 		
 	    String Mines = MinesGamePage.MinesGameFairnessVerifyBetMines(driver).getText();
 		
-	    System.out.println("Mines ="+Mines);
+	    System.out.println("Mines = "+Mines);
 		
 	    log.info("Minesgame Fairness Popup Mines getting Successfully");
 	    
 	   String ServerSeed = MinesGamePage.MinesGameFairnessVerifyBetServerSeed(driver).getAttribute("value");
 		
-		System.out.println("Server seed after Verification ="+ServerSeed);
+		System.out.println("Server seed after Verification = "+ServerSeed);
 		
 		log.info("Minesgame Fairness Popup Server Seed getting Successfully");
 		
@@ -949,10 +1213,12 @@ public class MinesGameTestCases extends base {
 }
 	
 	@Test(enabled = true, priority = 11)
-	public void MinesGameSetMines() throws Exception 
+	public void MinesGameSetMaxMines() throws Exception 
 	{
 		//VideoRecorder_utlity.startRecord("Mines Games Set Maximun No. of Mines");
-
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 				wait = new WebDriverWait(driver, 50);
 				
 				try
@@ -983,9 +1249,29 @@ public class MinesGameTestCases extends base {
 
 				log.info("Clicked on Play Now button");
 
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.MinesgameProperty("UserName"))));
 
 				log.info("User login successful with valid username & password");
+				
+				WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+				Actions action = new Actions(driver);
+				
+				try
+				{
+					wait.until(ExpectedConditions.visibilityOfElementLocated(
+							By.xpath(f.PlinkoProperty("OriginalHeader"))));
+					action.moveToElement( OriginalsHeader).click().perform();
+				}
+				catch(Exception e)
+				{
+					driver.navigate().refresh();
+					wait.until(ExpectedConditions.visibilityOfElementLocated(
+							By.xpath(f.PlinkoProperty("OriginalHeader"))));
+					OriginalsHeader.click();
+				}
+
+				log.info("Scrolling up to originals header");
 
 				wait.until(ExpectedConditions.visibilityOfElementLocated(
 						By.xpath(f.LoginProperty("MinesLink"))));
@@ -1014,7 +1300,7 @@ public class MinesGameTestCases extends base {
 
 				Amount.sendKeys(Keys.DELETE);
 
-				Amount.sendKeys("0.00000010");
+				Amount.sendKeys("0.00000002");
 				
 				log.info("Entering some Amount Successfully");
 				
@@ -1047,6 +1333,6 @@ public class MinesGameTestCases extends base {
 		
 		driver.close();
 		 
-		 log.info("Browser closed");
+		log.info("Browser closed");
 	}
 }

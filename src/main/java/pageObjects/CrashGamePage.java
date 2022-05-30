@@ -161,6 +161,55 @@ public class CrashGamePage {
 	{
 		return driver.findElement(By.xpath("//*[text()='START AUTOBET']"));
 	}
+	
+	public static WebElement CrashGameLiveStatsPopUp(WebDriver driver) {
+		return driver.findElement(By.xpath("//*[@class='LiveStatsModal__StatsCardsWrapper-sc-gafewh-4 bIhfOt']"));
+	}
+	
+	
+	
+	 public static WebElement CrashGameFairnessTransactionsRow(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("(//*[@class='IconGetters__Wrapper-sc-jp6spq-1 ZDNFx'])[1]"));
+	    }
+	
+	public static WebElement CrashGameFairnessGoToTransaction(WebDriver driver)
+ {
+     return driver.findElement(By.xpath("//*[@class='FairnessSection__LinkButton-sc-e5o9ot-4 eSVxxu']"));
+ }
+	
+	public static WebElement FAIRNESSChangeButton(WebDriver driver) {
+		return driver.findElement(By.xpath("//*[text()='CHANGE']"));
+	}
+
+	public static WebElement CrashGameFairnessServerSeed(WebDriver driver)
+ {
+     return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 bcESjD'])[1]"));
+ }
+ public static WebElement CrashGameFairnessServerSeedHashed(WebDriver driver)
+ {
+     return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 bcESjD'])[2]"));
+ }
+ public static WebElement CrashGameFairnessVerifyBet(WebDriver driver)
+ {
+     return driver.findElement(By.xpath("//*[text()='Verify Bet']"));
+ }
+ 
+ public static WebElement CrashGameFairnessRiskTab(WebDriver driver)
+ {
+     return driver.findElement(By.xpath("(//*[@class='CustomDropdown__DropDownButton-sc-1hmifsq-2 gBAQOB'])[2]"));
+ }
+ 
+ public static WebElement CrashGameFairnessRowsTab(WebDriver driver)
+ {
+     return driver.findElement(By.xpath("(//*[@class='CustomDropdown__DropDownButton-sc-1hmifsq-2 gBAQOB'])[3]"));
+ }
+ 
+ public static WebElement CrashGameFairnessGameTab(WebDriver driver)
+ {
+     return driver.findElement(By.xpath("(//*[@class='CustomDropdown__DropDownButton-sc-1hmifsq-2 gBAQOB'])[1]"));
+ }
+
 
 
 }

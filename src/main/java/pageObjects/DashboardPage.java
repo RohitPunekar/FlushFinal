@@ -38,22 +38,22 @@ public class DashboardPage {
 	
 	public static WebElement language1(WebDriver driver)
 	{
-		return driver.findElement(By.xpath("(//*[contains(@class,'bFmUdG')])[1]"));
+		return driver.findElement(By.xpath("(//*[contains(@class,'hqlcEE')])[1]"));
 	}
 	
 	public static WebElement language2(WebDriver driver)
 	{
-		return driver.findElement(By.xpath("(//*[contains(@class,'bFmUdG')])[2]"));
+		return driver.findElement(By.xpath("(//*[contains(@class,'hqlcEE')])[2]"));
 	}
 	
 	public static WebElement language3(WebDriver driver)
 	{
-		return driver.findElement(By.xpath("(//*[contains(@class,'bFmUdG')])[3]"));
+		return driver.findElement(By.xpath("(//*[contains(@class,'hqlcEE')])[3]"));
 	}
 	
 	public static WebElement language4(WebDriver driver)
 	{
-		return driver.findElement(By.xpath("(//*[contains(@class,'bFmUdG')])[4]"));
+		return driver.findElement(By.xpath("(//*[contains(@class,'hqlcEE')])[4]"));
 	}
 	
 	public static WebElement Userdropdown(WebDriver driver)

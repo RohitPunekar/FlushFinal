@@ -405,8 +405,8 @@ public class HomepageTest extends base {
 
 		log.info("Login button clicked successfully");
 
-		Thread.sleep(25000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("WelcomeGoogleIcon"))));
+		Thread.sleep(30000);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("WelcomeGoogleIcon"))));
 
 		Actions action = new Actions(driver);
 
@@ -602,7 +602,7 @@ public class HomepageTest extends base {
 
 		log.info("Signup button clicked successfully");
 
-		Thread.sleep(25000);
+		Thread.sleep(30000);
 		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("WelcomeGoogleIcon"))));
 
 		Actions action = new Actions(driver);
@@ -806,7 +806,7 @@ public class HomepageTest extends base {
 
 		log.info("Clicked on Join with your email");
 
-		Thread.sleep(25000);
+		Thread.sleep(30000);
 		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("WelcomeGoogleIcon"))));
 
 		WebElement Google = WelcomePopup.WelcomeGoogleIcon(driver);
@@ -1350,55 +1350,8 @@ public class HomepageTest extends base {
 
 
 
-	/*
 
 	@Test(enabled =  true, priority = 23)
-	public void Cashier() throws Exception {
-
-		//VideoRecorder_utlity.startRecord("Cashier");
-
-		wait = new WebDriverWait(driver, 50);
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Loginbutton"))));
-
-		Homepage.Loginbutton(driver).click();
-
-		log.info("Login button clicked successfully");
-
-		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
-
-		log.info("Entered valid username");
-
-		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
-
-		log.info("Entered valid password");
-
-		WelcomePopup.Welcomeplaynow(driver).click();
-
-		log.info("Clicked on Play Now button");
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
-
-		log.info("User login successful with valid username & password");
-
-		DashboardPage.Userdropdown(driver).click();
-
-		log.info("Clicked on User Dropdown Menu");
-
-		DashboardPage.Cashier(driver).click();
-
-		log.info("Click on Cashier");
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.FlushProperty("Cashierpopupdropdown"))));
-
-		log.info("Cashier Popup Visible Successfully");
-
-		//VideoRecorder_utlity.stopRecord();
-	}
-
-	 */
-
-	@Test(enabled =  true, priority = 24)
 	public void VIP() throws Exception {
 
 		//VideoRecorder_utlity.startRecord("VIP");

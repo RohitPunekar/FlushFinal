@@ -5,9 +5,26 @@
     <classes>
       <class name="com.Test.PlinkoGameTestCases">
         <methods>
+          <include name="PlinkoGameAutoBetTabWithLowRiskInfinite"/>
           <include name="closeBrowser"/>
           <include name="Initialization"/>
+          <include name="PlinkoGameAutoHalfAmountWithMediumRisk"/>
+          <include name="PlinkoGameHalfAmountWithHighRisk"/>
+          <include name="PlinkoGameAutoDoubleAmountWithLowRisk"/>
+          <include name="PlinkoGameAutoHalfAmountWithLowRisk"/>
+          <include name="PlinkoGameDoubleAmountWithMediumRisk"/>
+          <include name="PlinkoGameHalfAmountWithMediumRisk"/>
+          <include name="PlinkoGameHalfAmountWithLowRisk"/>
+          <include name="PlinkoGameBetFullFlowcheckingWithRiskLow"/>
+          <include name="PlinkoGameDoubleAmountWithHighRisk"/>
+          <include name="PlinkoGameBetFullFlowcheckingWithRiskHigh"/>
+          <include name="PlinkoGameAutoBetTabWithLowRisk"/>
+          <include name="PlinkoGameAutoBetTabWithMediumRisk"/>
+          <include name="PlinkoGameAutoDoubleAmountWithMediumRisk"/>
+          <include name="PlinkoGameAutoDoubleAmountWithHighRisk"/>
           <include name="PlinkoGameBetFullFlowcheckingWithRiskMedium"/>
+          <include name="PlinkoGameDoubleAmountWithLowRisk"/>
+          <include name="PlinkoGameAutoHalfAmountWithHighRisk"/>
         </methods>
       </class> <!-- com.Test.PlinkoGameTestCases -->
     </classes>

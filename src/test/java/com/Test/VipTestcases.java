@@ -25,7 +25,8 @@ import pageObjects.WelcomePopup;
 import resources.VideoRecorder_utlity;
 import resources.base;
 
-public class VipTestcases extends base {
+public class VipTestcases extends base
+{
 	public WebDriver driver;
 
 	public Homepage homepage;
@@ -47,7 +48,7 @@ public class VipTestcases extends base {
 	@Test(enabled = false, priority = 1)
 	public void CheckingHeaderLoyalityText() throws Exception {
 
-		VideoRecorder_utlity.startRecord("Checking Header Loyality Text");
+		//VideoRecorder_utlity.startRecord("Checking Header Loyality Text");
 
 		wait = new WebDriverWait(driver, 30);
 
@@ -89,21 +90,21 @@ public class VipTestcases extends base {
 
 		log.info("VIP clicked Successfully");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.VIPProperty("Loyality"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.VIPProperty("VipClub"))));
 
-		log.info("Loyality a Header Text Visible Successfully");
+		log.info("VIP Club  Header Text Visible Successfully");
 
-		VideoRecorder_utlity.stopRecord();
+	//	VideoRecorder_utlity.stopRecord();
 
 	}
 
 	@Test(enabled = false, priority = 2)
 	public void CheckingVipPageTabs() throws Exception {
 
-		VideoRecorder_utlity.startRecord("Checking Vip Page Tabs");
+	//	VideoRecorder_utlity.startRecord("Checking Vip Page Tabs");
 
 		wait = new WebDriverWait(driver, 80);
-
+		
 		driver.get(f.VIPProperty("DeletePoints"));
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.VIPProperty("DeletePointsOk"))));
@@ -142,7 +143,7 @@ public class VipTestcases extends base {
 
 		log.info("VIP clicked Successfully");
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.VIPProperty("Loyality"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.VIPProperty("VipClub"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -164,13 +165,13 @@ public class VipTestcases extends base {
 
 		log.info("clicked on Claim Rewards tab");
 
-		VideoRecorder_utlity.stopRecord();
+		//VideoRecorder_utlity.stopRecord();
 	}
 
 	@Test(enabled = false, priority = 3)
 	public void ClaimRewards() throws Exception {
 
-		VideoRecorder_utlity.startRecord("Claim Rewards");
+		//VideoRecorder_utlity.startRecord("Claim Rewards");
 
 		wait = new WebDriverWait(driver, 30);
 
@@ -220,7 +221,7 @@ public class VipTestcases extends base {
 
 		String Points = TotalPoints.getAttribute("innerText");
 
-		System.out.println("Total points " + Points);
+		System.out.println("Total points = " + Points);
 
 		String str = Points;
 
@@ -260,12 +261,15 @@ public class VipTestcases extends base {
 
 			ChooseYourRewardCancelButton.click();
 
-		} else {
+		} 
+		else 
+		{
 
 			System.out.println("Less than 500");
 
 		}
-		VideoRecorder_utlity.stopRecord();
+		
+		//VideoRecorder_utlity.stopRecord();
 	}
 
 	@Test(enabled = false, priority = 4)
@@ -1993,9 +1997,11 @@ public class VipTestcases extends base {
 	}
 
 	@AfterMethod
-	public void EndTest() {
-
-		driver.close();
+	public void EndTest() throws InterruptedException 
+	{
+		Thread.sleep(2000);
+		
+	//	driver.close();
 
 		log.info("Browser closed");
 	}

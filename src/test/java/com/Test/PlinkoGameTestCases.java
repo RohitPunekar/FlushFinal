@@ -3,6 +3,7 @@ package com.Test;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,6 +23,7 @@ import org.testng.asserts.SoftAssert;
 import pageObjects.DiceGamePage;
 import pageObjects.Homepage;
 import pageObjects.PlinkoGamePage;
+import pageObjects.WelcomePopup;
 import resources.VideoRecorder_utlity;
 import resources.base;
 
@@ -50,6 +52,8 @@ public class PlinkoGameTestCases extends base
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Bet Full Flow checking with Low Risk");
 		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
@@ -72,18 +76,26 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
+		Thread.sleep(2000);
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
-		//js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
-		
 		Actions action = new Actions(driver);
 		
 		try
@@ -100,9 +112,9 @@ public class PlinkoGameTestCases extends base
 			OriginalsHeader.click();
 		}
 
-		//action.moveToElement( OriginalsHeader).click().perform();
-
 		log.info("Scrolling up to originals header");
+		
+		Thread.sleep(4000);
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.PlinkoProperty("PlinkoLink"))));
@@ -120,7 +132,7 @@ public class PlinkoGameTestCases extends base
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -143,7 +155,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -178,20 +190,20 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletDropdown"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
 		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+		//System.out.println("TotalBalance = "+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -230,12 +242,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameBetFullFlowcheckingWithRiskMedium() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Bet Full Flow checking with Medium Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -252,11 +265,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -288,13 +309,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -317,7 +338,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -340,13 +361,8 @@ public class PlinkoGameTestCases extends base
 		js.executeScript("arguments[0].scrollIntoView();", Statistics);
 		
 		PlinkoGamePage.MyBets(driver).click();
-		
-		//Thread.sleep(4000);
-        PlinkoGamePage.Bets(driver).click();
-		
-		PlinkoGamePage.HighRollers(driver).click();
-		
-		PlinkoGamePage.MyBets(driver).click();
+	
+		Thread.sleep(4000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -354,11 +370,11 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
@@ -403,6 +419,9 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameBetFullFlowcheckingWithRiskHigh() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Bet Full Flow checking with High Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
@@ -424,11 +443,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -460,7 +487,7 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
@@ -489,7 +516,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -570,11 +597,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameHalfAmountWithLowRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Half Amount With Low Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
-
-		//Homepage.Loginbutton(driver).click();
+		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -591,11 +620,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
@@ -627,13 +664,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -656,7 +693,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -682,7 +719,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Getting half Amount Successfully through string format");
 		
-		System.out.println("Half Amount after clicking 1/2 button  =" + HalfAmount );
+		System.out.println("Half Amount after clicking 1/2 button  = " + HalfAmount );
 		
 //		double HalfAmt = Double.parseDouble(HalfAmount);
 //		
@@ -724,11 +761,11 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
@@ -776,6 +813,9 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameHalfAmountWithMediumRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Half Amount With Medium Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
@@ -798,11 +838,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -834,13 +882,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -863,7 +911,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -931,17 +979,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
 		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+		//System.out.println("TotalBalance = "+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -983,12 +1031,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameHalfAmountWithHighRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Half Amount With High Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -1005,11 +1054,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -1041,13 +1098,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1070,7 +1127,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -1096,7 +1153,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Getting half Amount Successfully through string format");
 		
-		System.out.println("Half Amount after clicking 1/2 button  =" + HalfAmount );
+		System.out.println("Half Amount after clicking 1/2 button  = " + HalfAmount );
 		
 //		double HalfAmt = Double.parseDouble(HalfAmount);
 //		
@@ -1138,17 +1195,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
 		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+		//System.out.println("TotalBalance = "+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1190,11 +1247,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameDoubleAmountWithLowRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Double Amount With Low Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
-
-		//Homepage.Loginbutton(driver).click();
+		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -1211,11 +1270,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -1247,13 +1314,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1276,7 +1343,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -1344,17 +1411,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
 		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+		//System.out.println("TotalBalance = "+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1396,6 +1463,9 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameDoubleAmountWithMediumRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Double Amount With Medium Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
@@ -1417,11 +1487,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -1453,13 +1531,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1482,7 +1560,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -1550,17 +1628,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
 		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+		//System.out.println("TotalBalance = "+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1589,7 +1667,6 @@ public class PlinkoGameTestCases extends base
 			System.out.println("User is in Loss");
 		}
 		
-		
 		Assert.assertEquals(s1,DoubleAmount, "Failed:Results are not same");
 		
 		System.out.println("Test case Passed");
@@ -1601,11 +1678,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameDoubleAmountWithHighRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Double Amount With High Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -1622,11 +1701,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -1658,13 +1745,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1687,7 +1774,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -1755,17 +1842,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
 		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+		//System.out.println("TotalBalance = "+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1807,11 +1894,12 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoBetTabWithLowRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet Tab With Low Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
-
-		//Homepage.Loginbutton(driver).click();
 		
 		try
 		{
@@ -1829,11 +1917,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -1865,13 +1961,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1894,7 +1990,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -1924,7 +2020,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -1940,11 +2036,11 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
@@ -1952,7 +2048,7 @@ public class PlinkoGameTestCases extends base
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
 		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+		//System.out.println("TotalBalance = "+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -1991,12 +2087,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoBetTabWithMediumRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet Tab With Medium Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -2013,11 +2110,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -2049,13 +2154,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2078,7 +2183,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -2108,7 +2213,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -2116,7 +2221,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -2124,11 +2229,11 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
@@ -2136,7 +2241,7 @@ public class PlinkoGameTestCases extends base
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
 		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+		//System.out.println("TotalBalance = "+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2175,11 +2280,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoBetTabWithHighRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet Tab With High Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -2196,11 +2303,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -2232,13 +2347,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2261,7 +2376,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -2291,7 +2406,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -2299,7 +2414,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -2307,11 +2422,11 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
@@ -2358,12 +2473,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoHalfAmountWithLowRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet Half Amount With Low Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -2380,11 +2496,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -2416,13 +2540,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2445,7 +2569,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000004");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -2477,7 +2601,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -2485,7 +2609,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -2493,19 +2617,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance);
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
-		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2544,12 +2666,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoHalfAmountWithMediumRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet Half Amount With Medium Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -2566,11 +2689,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -2602,13 +2733,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2631,7 +2762,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000004");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -2663,7 +2794,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -2671,7 +2802,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -2679,19 +2810,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
-		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2730,12 +2859,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoHalfAmountWithHighRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet Half Amount With High Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -2752,11 +2882,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -2788,13 +2926,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2817,7 +2955,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000004");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -2849,7 +2987,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -2857,7 +2995,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -2865,19 +3003,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
-		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -2916,12 +3052,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoDoubleAmountWithLowRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet Double Amount With Low Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -2938,11 +3075,18 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
-		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -2974,13 +3118,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -3003,7 +3147,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -3035,7 +3179,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -3043,7 +3187,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -3051,19 +3195,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
-		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -3102,12 +3244,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoDoubleAmountWithMediumRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet Double Amount With Medium Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -3124,11 +3267,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -3160,13 +3311,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -3189,7 +3340,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -3221,7 +3372,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -3229,7 +3380,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -3237,20 +3388,18 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
-		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
-		
+	
 		log.info("Getting Wallet Balance Successfully ");
 
 		double WalletAmountAfterBET = new Double(TotalBalanceAfterBET);
@@ -3288,12 +3437,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoDoubleAmountWithHighRisk() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Bet Full Flow checking with Medium Risk");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -3310,11 +3460,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -3346,13 +3504,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -3375,7 +3533,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -3407,7 +3565,7 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Start Auto Bet button clicked successfully");
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -3415,7 +3573,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -3423,19 +3581,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
-		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -3474,12 +3630,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameAutoBetTabWithLowRiskInfinite() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Auto Bet with low Risk & Infinite No. Of Bets");
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -3496,11 +3653,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
+
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -3532,13 +3697,13 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		WebElement walletBalance = Homepage.WalletBalanceDropdown(driver);
 		
 		String TotalBalance = walletBalance.getAttribute("innerText");
 		
-		System.out.println("TotalBalance ="+TotalBalance);
+		System.out.println("TotalBalance = "+TotalBalance);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -3561,7 +3726,7 @@ public class PlinkoGameTestCases extends base
 
 		Amount.sendKeys(Keys.DELETE);
 
-		Amount.sendKeys("0.00000100");
+		Amount.sendKeys("0.00000002");
 		
 		log.info("Entering some Amount Successfully");
 		
@@ -3595,7 +3760,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.ClickOnStopAutoBet(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Statistics = PlinkoGamePage.MyBets(driver);
 		
@@ -3603,7 +3768,7 @@ public class PlinkoGameTestCases extends base
 		
 		PlinkoGamePage.MyBets(driver).click();
 		
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		
 		WebElement Payout = PlinkoGamePage.PayoutPlinkoGame(driver);
 
@@ -3611,19 +3776,17 @@ public class PlinkoGameTestCases extends base
 
 		log.info("Getting Payout Successfully through string format");
 
-		System.out.println("Payout  =" + PayoutAmt );
+		System.out.println("Payout  = " + PayoutAmt );
 
 		double PayoutAmount = Double.parseDouble(PayoutAmt);
 		
-		System.out.println("PayoutAmount =" +PayoutAmount);
+		System.out.println("PayoutAmount = " +PayoutAmount);
 		
 		Thread.sleep(2000);
 		
 		js.executeScript("arguments[0].scrollIntoView();", walletBalance );
 		
 		String TotalBalanceAfterBET = walletBalance.getAttribute("innerText");
-		
-		//System.out.println("TotalBalance ="+TotalBalanceAfterBET);
 		
 		log.info("Getting Wallet Balance Successfully ");
 
@@ -3662,12 +3825,13 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameSetting() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Setting");
+	
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
 		Homepage page = new Homepage(driver);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -3684,13 +3848,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
-		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 		
@@ -3720,12 +3890,11 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		PlinkoGamePage.PlinkoGameSetting(driver).click();
 		
 		log.info("Plinkogame Settings Popup is Visible Successfully");
-		
 		
 		boolean Result = PlinkoGamePage.PlinkoGameSettingSoundButton(driver).isDisplayed();
 		
@@ -3740,17 +3909,6 @@ public class PlinkoGameTestCases extends base
 			System.out.println("Sound button is not Displayed");
 		}
 		
-		boolean Result1 = PlinkoGamePage.PlinkoGameSettingGamesSidebarButton(driver).isDisplayed();
-		
-		if(Result1==true)
-		{
-			System.out.println("Games sidebar button is Displayed");
-		}
-		else
-		{
-			System.out.println("Games sidebar button is not Displayed");
-		}
-		
 		//VideoRecorder_utlity.stopRecord();
 		
 	}
@@ -3759,12 +3917,11 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameRules() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Rules");
-		Homepage page = new Homepage(driver);
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -3781,13 +3938,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
-		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 		
@@ -3817,7 +3980,7 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		PlinkoGamePage.PlinkoGameRules(driver).click();
 		
@@ -3837,12 +4000,11 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameLiveStats() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Live Stats");
-		Homepage page = new Homepage(driver);
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -3859,13 +4021,19 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
-		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
 
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 		
@@ -3895,11 +4063,37 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
+		
+		PlinkoGamePage.Manual(driver).click();
+		
+		WebElement Amount = PlinkoGamePage.BetAmountInpField(driver);
+		
+		Amount.sendKeys(Keys.CONTROL, "a");
+
+		Amount.sendKeys(Keys.DELETE);
+
+		Amount.sendKeys("0.00000002");
+		
+		log.info("Entering some Amount Successfully");
+		
+		PlinkoGamePage.Risk(driver).click();
+		
+		PlinkoGamePage.RiskLow(driver).click();
+		
+		PlinkoGamePage.Rows(driver).click();
+		
+		PlinkoGamePage.NoOfRows8(driver).click();
 		
 		PlinkoGamePage.PlinkoGameLiveStats(driver).click();
 		
 		log.info("Plinkogame Live Stats Popup is Visible Successfully");
+		
+		PlinkoGamePage.ClickOnBETBotton(driver).click();
+		
+		log.info("Bet button clicked successfully");
+		
+		Thread.sleep(6000);
 		
 		String ActText = PlinkoGamePage.PlinkoGameLiveStatsPopUp(driver).getText();
 		
@@ -3915,12 +4109,11 @@ public class PlinkoGameTestCases extends base
 	public void PlinkoGameFairnessIcon() throws Exception
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Fairness Icon");
-		Homepage page = new Homepage(driver);
+		
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 				
 		wait = new WebDriverWait(driver, 50);
 
-		//Homepage.Loginbutton(driver).click();
-		
 		try
 		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -3937,14 +4130,20 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
-		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		log.info("Entered valid username");
 
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
+		
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 		
 		Actions action = new Actions(driver);
@@ -3973,7 +4172,33 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
+		
+		PlinkoGamePage.Manual(driver).click();
+		
+		WebElement Amount = PlinkoGamePage.BetAmountInpField(driver);
+		
+		Amount.sendKeys(Keys.CONTROL, "a");
+
+		Amount.sendKeys(Keys.DELETE);
+
+		Amount.sendKeys("0.00000002");
+		
+		log.info("Entering some Amount Successfully");
+		
+		PlinkoGamePage.Risk(driver).click();
+		
+		PlinkoGamePage.RiskLow(driver).click();
+		
+		PlinkoGamePage.Rows(driver).click();
+		
+		PlinkoGamePage.NoOfRows8(driver).click();
+		
+		PlinkoGamePage.ClickOnBETBotton(driver).click();
+		
+		log.info("Bet button clicked successfully");
+		
+		Thread.sleep(4000);
 		
 		PlinkoGamePage.PlinkoGameFairnessIcon(driver).click();
 		
@@ -3982,14 +4207,22 @@ public class PlinkoGameTestCases extends base
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 			By.xpath(f.PlinkoProperty("Change"))));
 		
+		WebElement ServerSeed = PlinkoGamePage.PlinkoGameFairnessActiveServerSeed(driver);
+		
+		WebElement NextServerSeed = PlinkoGamePage.PlinkoGameFairnessNextServerSeed(driver);
+		
+		String ActiveServerSeed = ServerSeed.getAttribute("value");
+		 
+		System.out.println("Active Server seed = "+ActiveServerSeed);
+		 
+		String NextServerSeedHashed = NextServerSeed.getAttribute("value");
+		
+	    System.out.println("Next Server Seed Hashed = "+NextServerSeedHashed);
+		 
 		PlinkoGamePage.PlinkoGameFairnessPopUp(driver).click();
-		
+			
 		log.info("Plinkogame Fairness PopUp 'CHANGE' Button Clicked Successfully");
-		
-		 WebElement ServerSeed = PlinkoGamePage.PlinkoGameFairnessServerSeed(driver);
-		
-		 WebElement ServerSeedHashed = PlinkoGamePage.PlinkoGameFairnessServerSeedHashed(driver);
-		
+		 
 		PlinkoGamePage.PlinkoGameFairnessGoToTransaction(driver).click();
 		
 		log.info("Plinkogame Fairness PopUp 'Go to Transaction Link' Clicked Successfully");
@@ -4019,10 +4252,9 @@ public class PlinkoGameTestCases extends base
 		
 		System.out.println(Rows);
 		
-		log.info("Plinkogame Fairness PopUp Rows Tab Text get Successfully");
+		log.info("Plinkogame Fairness PopUp Rows Tab Text get Successfully");	
 		
-		
-		Assert.assertNotEquals(ServerSeed, ServerSeedHashed,"Failed :Both results are same");
+		Assert.assertNotEquals(ServerSeed, NextServerSeed,"Failed :Both results are same");
 		
 		System.out.println("Test case passed");
 		
@@ -4035,7 +4267,7 @@ public class PlinkoGameTestCases extends base
 	{
 		//VideoRecorder_utlity.startRecord("PlinkoGame Error Message Checking");
 		
-		Homepage page = new Homepage(driver);
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 				
 		wait = new WebDriverWait(driver, 50);
 		
@@ -4056,14 +4288,20 @@ public class PlinkoGameTestCases extends base
 		
 		log.info("Login button clicked successfully");
 
-		page.Login(driver);
-		
-		log.info("Login Successfully with valid username and valid Password ");
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Dashboardwallet"))));
+		WelcomePopup.Welcomeemail(driver).sendKeys(f.LoginProperty("UserEmail"));
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		log.info("Entered valid username");
+
+		WelcomePopup.Welcomepassword(driver).sendKeys(f.LoginProperty("UserPassword"));
+
+		log.info("Entered valid password");
+
+		WelcomePopup.Welcomeplaynow(driver).click();
+
+		log.info("Clicked on Play Now button");
 		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.PlinkoProperty("UserName"))));
+
 		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
 
 		Actions action = new Actions(driver);
@@ -4092,7 +4330,7 @@ public class PlinkoGameTestCases extends base
 		log.info("Plinko game link clicked successfully");
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(f.PlinkoProperty("WalletBalance"))));
+				By.xpath(f.PlinkoProperty("UserName"))));
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath(f.PlinkoProperty("Manual"))));
@@ -4122,7 +4360,9 @@ public class PlinkoGameTestCases extends base
 	public void closeBrowser() throws InterruptedException
 	{
 		Thread.sleep(2000);
+		
 		driver.close();
+		
 		log.info("Browser closed");
 	}
 	

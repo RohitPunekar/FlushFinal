@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.google.j2objc.annotations.Property;
+
 
 public class ConfigProperties {
 

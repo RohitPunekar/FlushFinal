@@ -34,16 +34,26 @@ public class DiceGamePage {
 		return driver.findElement(
 				By.xpath("(//*[@class='SidebarFooterCommands__CommandButtonContent-sc-gpcbvp-5 jALDpb'])[1]"));
 	}
-
+	public static WebElement SettingSoundButton(WebDriver driver) {
+		return driver.findElement(
+				By.xpath("//*[@class='CustomSwitch__SwitchWrapper-sc-1bodba9-0 hbtKro']"));
+	}
 	public static WebElement DiceGameRulesICon(WebDriver driver) {
 		return driver.findElement(
 				By.xpath("(//*[@class='SidebarFooterCommands__CommandButtonContent-sc-gpcbvp-5 jALDpb'])[2]"));
 	}
-
+	public static WebElement DiceGameRulesPopUp(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("//*[@class='RulesLimitsModal__Main-sc-1bim13d-1 jDIAL']"));
+    }
 	public static WebElement DiceGameLiveStatusIcon(WebDriver driver) {
 		return driver.findElement(
 				By.xpath("(//*[@class='SidebarFooterCommands__CommandButtonContent-sc-gpcbvp-5 jALDpb'])[3]"));
 	}
+	 public static WebElement DiceGameLiveStatsPopUp(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("//*[@class='LiveStatsModal__StatsCardsWrapper-sc-gafewh-4 bIhfOt']"));
+	    }
 
 	public static WebElement DiceGameFairnessIcon(WebDriver driver) {
 		return driver.findElement(
@@ -112,4 +122,41 @@ public class DiceGamePage {
 	public static WebElement NoOfBETSButton(WebDriver driver) {
 		return driver.findElement(By.xpath("(//*[@class='LabelInput__MainInput-sc-zkip7h-6 jZgjty'])[2]"));
 	}
+	
+	 public static WebElement DiceGameFairnessPopUp(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("//*[text()='CHANGE']"));
+	    }
+	    public static WebElement DiceGameFairnessGoToTransaction(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("//*[@class='FairnessSection__LinkButton-sc-e5o9ot-4 eSVxxu']"));
+	    }
+	    public static WebElement DiceGameFairnessTransactionsRow(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("(//*[@class='IconGetters__Wrapper-sc-jp6spq-1 ZDNFx'])[1]"));
+	    }
+	    public static WebElement DiceGameFairnessActiveServerSeed(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 bcESjD'])[2]"));
+	    }
+	    public static WebElement DiceGameFairnessNextServerSeed(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 glARGZ'])[1]"));
+	    }
+	    public static WebElement DiceGameFairnessVerifyBet(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("//*[text()='Verify Bet']"));
+	    }
+	    public static WebElement DiceGameFairnessGameTab(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("(//*[@class='CustomDropdown__DropDownButton-sc-1hmifsq-2 gBAQOB'])[1]"));
+	    }
+	    public static WebElement DiceGameFairnessNonceTab(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 glARGZ'])[2]"));
+	    }
+	    public static WebElement DiceGameFairnessServerSeedTab(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 glARGZ'])[3]"));
+	    }
 }

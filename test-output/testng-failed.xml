@@ -1,83 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
-  <listeners>
-    <listener class-name="com.Test.Listeners"/>
-  </listeners>
-  <test thread-count="5" name="HomepageTest(failed)">
-    <classes>
-      <class name="com.Test.HomepageTest">
-        <methods>
-          <include name="JoinWithYourEmail"/>
-          <include name="JoinEmailGoogleLogin"/>
-          <include name="EndTest"/>
-          <include name="SignupGoogleLogin"/>
-          <include name="VIP"/>
-          <include name="initialize"/>
-        </methods>
-      </class> <!-- com.Test.HomepageTest -->
-    </classes>
-  </test> <!-- HomepageTest(failed) -->
-  <test thread-count="5" name="DashboardPageTest(failed)">
-    <classes>
-      <class name="com.Test.DashBoardpageTestCases">
-        <methods>
-          <include name="ValidateSlotsSection"/>
-          <include name="EndTest"/>
-          <include name="initialize"/>
-        </methods>
-      </class> <!-- com.Test.DashBoardpageTestCases -->
-    </classes>
-  </test> <!-- DashboardPageTest(failed) -->
-  <test thread-count="5" name="DiceGameTest(failed)">
-    <classes>
-      <class name="com.Test.DiceGameTestcases">
-        <methods>
-          <include name="DiceGameAutoDoubleAmount"/>
-          <include name="DiceGameDoubleBetAmount"/>
-          <include name="DiceGameAutoNumberOfBetsThree"/>
-          <include name="Initialization"/>
-          <include name="EndTest"/>
-        </methods>
-      </class> <!-- com.Test.DiceGameTestcases -->
-    </classes>
-  </test> <!-- DiceGameTest(failed) -->
-  <test thread-count="5" name="CrashGameTest(failed)">
-    <classes>
-      <class name="com.Test.CrashGameTestCases">
-        <methods>
-          <include name="CrashGameBetFullFlowChecking"/>
-          <include name="EndTest"/>
-          <include name="Initialization"/>
-        </methods>
-      </class> <!-- com.Test.CrashGameTestCases -->
-    </classes>
-  </test> <!-- CrashGameTest(failed) -->
-  <test thread-count="5" name="MinesGameTest(failed)">
-    <classes>
-      <class name="com.Test.MinesGameTestCases">
-        <methods>
-          <include name="MinesGameSetting"/>
-          <include name="MinesGameBetWithDoubleAmount"/>
-          <include name="initialize"/>
-          <include name="MinesGameLiveStats"/>
-          <include name="MinesGameFairnessIcon"/>
-          <include name="EndTest"/>
-        </methods>
-      </class> <!-- com.Test.MinesGameTestCases -->
-    </classes>
-  </test> <!-- MinesGameTest(failed) -->
-  <test thread-count="5" name="PlinkoGameTest(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
       <class name="com.Test.PlinkoGameTestCases">
         <methods>
           <include name="PlinkoGameAutoBetTabWithLowRiskInfinite"/>
           <include name="closeBrowser"/>
           <include name="Initialization"/>
-          <include name="PlinkoGameAutoBetTabWithHighRisk"/>
           <include name="PlinkoGameAutoHalfAmountWithMediumRisk"/>
           <include name="PlinkoGameHalfAmountWithHighRisk"/>
-          <include name="PlinkoGameLiveStats"/>
           <include name="PlinkoGameAutoDoubleAmountWithLowRisk"/>
           <include name="PlinkoGameAutoHalfAmountWithLowRisk"/>
           <include name="PlinkoGameDoubleAmountWithMediumRisk"/>
@@ -85,7 +17,6 @@
           <include name="PlinkoGameHalfAmountWithLowRisk"/>
           <include name="PlinkoGameBetFullFlowcheckingWithRiskLow"/>
           <include name="PlinkoGameDoubleAmountWithHighRisk"/>
-          <include name="PlinkoGameFairnessIcon"/>
           <include name="PlinkoGameBetFullFlowcheckingWithRiskHigh"/>
           <include name="PlinkoGameAutoBetTabWithLowRisk"/>
           <include name="PlinkoGameAutoBetTabWithMediumRisk"/>
@@ -93,60 +24,9 @@
           <include name="PlinkoGameAutoDoubleAmountWithHighRisk"/>
           <include name="PlinkoGameBetFullFlowcheckingWithRiskMedium"/>
           <include name="PlinkoGameDoubleAmountWithLowRisk"/>
-          <include name="PlinkoGameSetting"/>
           <include name="PlinkoGameAutoHalfAmountWithHighRisk"/>
         </methods>
       </class> <!-- com.Test.PlinkoGameTestCases -->
     </classes>
-  </test> <!-- PlinkoGameTest(failed) -->
-  <test thread-count="5" name="WalletModuleTest(failed)">
-    <classes>
-      <class name="com.Test.WalletModule">
-        <methods>
-          <include name="WalletDepositSectionMATIC"/>
-          <include name="closeBrowser"/>
-          <include name="WalletWithdrawSection"/>
-          <include name="WalletWithdrawMinAmount"/>
-          <include name="WalletDepositSectionBNB"/>
-          <include name="initialize"/>
-        </methods>
-      </class> <!-- com.Test.WalletModule -->
-    </classes>
-  </test> <!-- WalletModuleTest(failed) -->
-  <test thread-count="5" name="HomepageSidebarTest(failed)">
-    <classes>
-      <class name="com.Test.HomepageSidebar">
-        <methods>
-          <include name="LobbyIcon"/>
-          <include name="SidebarLanguageIconFourthLang"/>
-          <include name="Initialization"/>
-          <include name="FlushOriginalsIcon"/>
-          <include name="EndTest"/>
-          <include name="SidebarLanguageIconThirdLang"/>
-          <include name="LiveCasinoIcon"/>
-          <include name="SidebarArrow"/>
-          <include name="NewGamesIcon"/>
-          <include name="SidebarLanguageIconSecondLang"/>
-          <include name="SidebarLiveChatIcon"/>
-          <include name="SidebarLanguageIconEnglish"/>
-          <include name="ProvidersIcon"/>
-          <include name="SidebarVIPIcon"/>
-          <include name="SidebarBuyCryptoIcon"/>
-          <include name="FeaturedSlotsIcon"/>
-          <include name="PopularGamesIcon"/>
-        </methods>
-      </class> <!-- com.Test.HomepageSidebar -->
-    </classes>
-  </test> <!-- HomepageSidebarTest(failed) -->
-  <test thread-count="5" name="HomepageFooterTest(failed)">
-    <classes>
-      <class name="com.Test.HomepageFooter">
-        <methods>
-          <include name="HomeButton"/>
-          <include name="initialize"/>
-          <include name="EndTest"/>
-        </methods>
-      </class> <!-- com.Test.HomepageFooter -->
-    </classes>
-  </test> <!-- HomepageFooterTest(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

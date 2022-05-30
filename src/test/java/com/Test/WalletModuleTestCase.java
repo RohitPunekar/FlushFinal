@@ -13,10 +13,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import pageObjects.Homepage;
+import pageObjects.WalletModule;
 import pageObjects.WelcomePopup;
 import resources.base;
 
-public class WalletModule extends base
+public class WalletModuleTestCase extends base
 {
 	public WebDriver driver;
 
@@ -71,9 +72,9 @@ public class WalletModule extends base
 
 				log.info("Clicked on Play Now button");
 				
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 				
-				pageObjects.WalletModule.WalletIcon(driver).click();
+				WalletModule.WalletIcon(driver).click();
 				
 				log.info("Clicked Walletn button");
 				
@@ -82,7 +83,7 @@ public class WalletModule extends base
 	}		
 						
 		@Test(enabled = true, priority = 2)
-	     public void WalletDepositSectionBTC() throws IOException
+	     public void WalletDepositSectionBTC() throws IOException, InterruptedException
 		{
 			//VideoRecorder_utlity.startRecord("Wallet BTC Deposit section");
 
@@ -116,25 +117,29 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		    
-		    pageObjects.WalletModule.Deposit(driver).click();
+		   WalletModule.Deposit(driver).click();
 			
 			log.info("Clicked Deposit button");
 			
-			pageObjects.WalletModule.DepositCurrency(driver).click();
+			WalletModule.DepositCurrency(driver).click();
 			
 			log.info("Clicked on Deposit currency Successfully");
 			
-			pageObjects.WalletModule.DepositCurrencyBTC(driver).click();
+			WalletModule.DepositDOGE(driver).click();
+			
+			WalletModule.DepositCurrency(driver).click();
+			
+			WalletModule.DepositCurrencyBTC(driver).click();
 			
 			log.info("Clicked Deposit BTC currency Successfully");
 			
-			String Address = pageObjects.WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
+			String Address = WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
 
 			System.out.println("Deposite Address = "+ Address);
 			
@@ -178,25 +183,25 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		    
-		    pageObjects.WalletModule.Deposit(driver).click();
+		    WalletModule.Deposit(driver).click();
 			
 			log.info("Clicked Deposit button");
 			
-			pageObjects.WalletModule.DepositCurrency(driver).click();
+			WalletModule.DepositCurrency(driver).click();
 			
 			log.info("Clicked on Deposit currency Successfully");
 			
-			pageObjects.WalletModule.DepositDOGE(driver).click();
+			WalletModule.DepositDOGE(driver).click();
 			
 			log.info("Clicked Deposit DOGE currency Successfully");
 			
-			String Address = pageObjects.WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
+			String Address = WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
 
 			System.out.println("Deposit Address = "+ Address);
 			
@@ -240,25 +245,25 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		    
-		    pageObjects.WalletModule.Deposit(driver).click();
+		    WalletModule.Deposit(driver).click();
 			
 			log.info("Clicked Deposit button");
 			
-			pageObjects.WalletModule.DepositCurrency(driver).click();
+			WalletModule.DepositCurrency(driver).click();
 			
 			log.info("Clicked on Deposit currency Successfully");
 			
-			pageObjects.WalletModule.DepositLTC(driver).click();
+			WalletModule.DepositLTC(driver).click();
 			
 			log.info("Clicked Deposit LTC currency Successfully");
 			
-			String Address = pageObjects.WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
+			String Address = WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
 
 			System.out.println("Deposit Address = "+ Address);
 			
@@ -302,25 +307,25 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		    
-		    pageObjects.WalletModule.Deposit(driver).click();
+		    WalletModule.Deposit(driver).click();
 			
 			log.info("Clicked Deposit button");
 			
-			pageObjects.WalletModule.DepositCurrency(driver).click();
+			WalletModule.DepositCurrency(driver).click();
 			
 			log.info("Clicked on Deposit currency Successfully");
 			
-			pageObjects.WalletModule.DepositETH(driver).click();
+			WalletModule.DepositETH(driver).click();
 			
 			log.info("Clicked Deposit ETH currency Successfully");
 			
-			String Address = pageObjects.WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
+			String Address = WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
 
 			System.out.println("Deposit Address = "+ Address);
 			
@@ -364,25 +369,25 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		    
-		    pageObjects.WalletModule.Deposit(driver).click();
+		    WalletModule.Deposit(driver).click();
 			
 			log.info("Clicked Deposit button");
 			
-			pageObjects.WalletModule.DepositCurrency(driver).click();
+			WalletModule.DepositCurrency(driver).click();
 			
 			log.info("Clicked on Deposit currency Successfully");
 			
-			pageObjects.WalletModule.DepositMATIC(driver).click();
+			WalletModule.DepositMATIC(driver).click();
 			
 			log.info("Clicked Deposit MATIC currency Successfully");
 			
-			String Address = pageObjects.WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
+			String Address = WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
 
 			System.out.println("Deposit Address = "+ Address);
 			
@@ -426,25 +431,25 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		    
-		    pageObjects.WalletModule.Deposit(driver).click();
+		    WalletModule.Deposit(driver).click();
 			
 			log.info("Clicked Deposit button");
 			
-			pageObjects.WalletModule.DepositCurrency(driver).click();
+			WalletModule.DepositCurrency(driver).click();
 			
 			log.info("Clicked on Deposit currency Successfully");
 			
-			pageObjects.WalletModule.DepositBNB(driver).click();
+			WalletModule.DepositBNB(driver).click();
 			
 			log.info("Clicked Deposit BNB currency Successfully");
 			
-			String Address = pageObjects.WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
+			String Address = WalletModule.DepositCurrencyAddress(driver).getAttribute("value");
 
 			System.out.println("Deposit Address = "+ Address);
 			
@@ -489,29 +494,29 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		
-		    pageObjects.WalletModule.Withdraw(driver).click();
+		    WalletModule.Withdraw(driver).click();
 			
 			log.info("Clicking on Withdraw Successfully");
 			
-			String YourBalance = pageObjects.WalletModule.YourBalance(driver).getText();
+			String YourBalance = WalletModule.YourBalance(driver).getText();
 			
 			System.out.println("Your Balance = "+YourBalance);
 			
 			double Balance = Double.parseDouble(YourBalance);
 			
-			pageObjects.WalletModule.WithdrawalAddress(driver).sendKeys(f.LoginProperty("WithdrawalAddress"));
+			WalletModule.WithdrawalAddress(driver).sendKeys(f.WalletProperty("WithdrawalAddress"));
 			
 			log.info("Withdraw address sent Successfully");
 			
-			WebElement WithdrawAmount = pageObjects.WalletModule.WithdrawAmount(driver);
+			WebElement WithdrawAmount = WalletModule.WithdrawAmount(driver);
 			
-			WithdrawAmount.sendKeys("0.00050000");
+			WithdrawAmount.sendKeys("1.00050000");
 			
 			log.info("Withdraw Amount sent Successfully");
 			
@@ -523,11 +528,11 @@ public class WalletModule extends base
 			
 			if(Balance > WAmount)
 				{
-				pageObjects.WalletModule.WithdrawAmountButton(driver).click();
+				WalletModule.WithdrawAmountButton(driver).click();
 			
 				log.info("Clicking on Withdraw Amount Successfully");
 			
-				String SuccessMessage = pageObjects.WalletModule.WithdrawSuccessMessage(driver).getText();
+				String SuccessMessage = WalletModule.WithdrawSuccessMessage(driver).getText();
 				
 				System.out.println("Withdrawal Message = "+SuccessMessage);
 				}
@@ -574,29 +579,29 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		
-		    pageObjects.WalletModule.Withdraw(driver).click();
+		   WalletModule.Withdraw(driver).click();
 			
 			log.info("Clicking on Withdraw Successfully");
 			
-			String YourBalance = pageObjects.WalletModule.YourBalance(driver).getText();
+			String YourBalance = WalletModule.YourBalance(driver).getText();
 			
 			System.out.println("Your Balance = "+YourBalance);
 			
-			pageObjects.WalletModule.WithdrawalAddress(driver).sendKeys(f.LoginProperty("WithdrawalAddress"));     
+			WalletModule.WithdrawalAddress(driver).sendKeys(f.WalletProperty("WithdrawalAddress"));     
 			
 			log.info("Withdrawal address sent Successfully");
 			
-			pageObjects.WalletModule.WithdrawmaxButton(driver).click();
+			WalletModule.WithdrawmaxButton(driver).click();
 			
 			log.info("Clicking on Max button Successfully");
 			
-		    WebElement WithdrawAmount = pageObjects.WalletModule.WithdrawAmount(driver); 
+		    WebElement WithdrawAmount = WalletModule.WithdrawAmount(driver); 
 		     
 		    String Amount = WithdrawAmount.getAttribute("value");
 
@@ -642,25 +647,25 @@ public class WalletModule extends base
 
 			log.info("Clicked on Play Now button");
 							
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='WALLET']")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.WalletProperty("UserName"))));
 							
-			pageObjects.WalletModule.WalletIcon(driver).click();
+			WalletModule.WalletIcon(driver).click();
 							
 		    log.info("Clicked Walletn button");
 		
-		    pageObjects.WalletModule.Withdraw(driver).click();
+		    WalletModule.Withdraw(driver).click();
 			
 			log.info("Clicking on Withdraw Successfully");
 			
-			String YourBalance = pageObjects.WalletModule.YourBalance(driver).getText();
+			String YourBalance = WalletModule.YourBalance(driver).getText();
 			
 			System.out.println("Your Balance = "+YourBalance);
 			
-			pageObjects.WalletModule.WithdrawalAddress(driver).sendKeys(f.LoginProperty("WithdrawalAddress"));     
+			WalletModule.WithdrawalAddress(driver).sendKeys(f.WalletProperty("WithdrawalAddress"));     
 			
 			log.info("Withdrawal address sent Successfully");
 			
-			String ActualText = pageObjects.WalletModule.WithdrawMinAmount(driver).getText();
+			String ActualText = WalletModule.WithdrawMinAmount(driver).getText();
 			
 			System.out.println(ActualText);
 			
@@ -668,15 +673,15 @@ public class WalletModule extends base
 			
 			System.out.println("Min Amount = "+MinAmount);
 			
-			WebElement WithdrawAmount = pageObjects.WalletModule.WithdrawAmount(driver);
+			WebElement WithdrawAmount = WalletModule.WithdrawAmount(driver);
 			
 			WithdrawAmount.sendKeys(MinAmount);
 			
-			pageObjects.WalletModule.WithdrawAmountButton(driver).click();
+			WalletModule.WithdrawAmountButton(driver).click();
 			
 			log.info("Withdraw Amount Button clicked Successfully");
 			
-			String SuccessMessage = pageObjects.WalletModule.WithdrawSuccessMessage(driver).getText();
+			String SuccessMessage = WalletModule.WithdrawSuccessMessage(driver).getText();
 			
 			System.out.println("Withdrawal Message = "+SuccessMessage);
 			

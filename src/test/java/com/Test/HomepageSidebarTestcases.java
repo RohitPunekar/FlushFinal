@@ -1,5 +1,7 @@
 package com.Test;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,8 +13,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.Homepage;
+import pageObjects.HomepageSidebar;
 import resources.base;
-public class HomepageSidebar extends base
+public class HomepageSidebarTestcases extends base
 {
     public WebDriver driver;
     
@@ -34,20 +37,25 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=1)
-    public void LobbyIcon()
+    public void LobbyIcon() throws InterruptedException, IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Lobby Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.LobbyIcon(driver).click();
+        //Thread.sleep(2000);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("LobbyIcon"))));
+        
+        HomepageSidebar.LobbyIcon(driver).click();
         
         log.info("Lobby Icon clicked successfully");
         
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[@class='container']")));
         
-        boolean Result = pageObjects.HomepageSidebar.Container(driver).isDisplayed();
+        boolean Result = HomepageSidebar.Container(driver).isDisplayed();
         
         if(Result==true)
         {
@@ -63,20 +71,23 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=2)
-    public void FeaturedSlotsIcon()
+    public void FeaturedSlotsIcon() throws IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Featured Slots Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.FeaturedSlotsIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("FeaturedSlotsIcon"))));
+        
+        HomepageSidebar.FeaturedSlotsIcon(driver).click();
         
         log.info("Featured Slots Icon clicked successfully");
         
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[text()='Featured Slots']")));
         
-        boolean Result = pageObjects.HomepageSidebar.FeaturedSlots(driver).isDisplayed();
+        boolean Result = HomepageSidebar.FeaturedSlots(driver).isDisplayed();
         
         if(Result==true)
         {
@@ -92,20 +103,20 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=3)
-    public void LiveCasinoIcon()
+    public void LiveCasinoIcon() throws IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Live Casino Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.LiveCasinoIcon(driver).click();
-        
-        log.info("Live Casino Icon clicked successfully");
-        
         wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[text()='Live Casino']")));
+				By.xpath(f.SidebarProperty("LiveCasinoIcon")))); 
         
-        boolean Result = pageObjects.HomepageSidebar.LiveCasino(driver).isDisplayed();
+        HomepageSidebar.LiveCasinoIcon(driver).click();
+        
+        log.info("Live Casino Icon clicked successfully"); 
+       
+        boolean Result = HomepageSidebar.LiveCasino(driver).isDisplayed();
         
         if(Result==true)
         {
@@ -121,20 +132,20 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=4)
-    public void FlushOriginalsIcon()
+    public void FlushOriginalsIcon() throws IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Flush Originals Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.FlushOriginalsIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("FlushOriginalsIcon"))));
+        
+        HomepageSidebar.FlushOriginalsIcon(driver).click();
         
         log.info("Flush Originals Icon clicked successfully");
         
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[text()='Flush Originals']")));
-        
-        boolean Result = pageObjects.HomepageSidebar.flushOriginals(driver).isDisplayed();
+        boolean Result = HomepageSidebar.flushOriginals(driver).isDisplayed();
         
         if(Result==true)
         {
@@ -150,20 +161,20 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=5)
-    public void NewGamesIcon()
+    public void NewGamesIcon() throws IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar New Games Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.NewGamesIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("NewGamesIcon"))));
+        
+        HomepageSidebar.NewGamesIcon(driver).click();
         
         log.info("New games Icon clicked successfully");
         
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[text()='New Games']")));
-        
-        boolean Result = pageObjects.HomepageSidebar.NewGames(driver).isDisplayed();
+        boolean Result = HomepageSidebar.NewGames(driver).isDisplayed();
         
         if(Result==true)
         {
@@ -178,20 +189,20 @@ public class HomepageSidebar extends base
         
     }
     @Test(enabled = true,priority=6)
-    public void PopularGamesIcon()
+    public void PopularGamesIcon() throws IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Popular Games Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.PopularGamesIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("PopularGamesIcon"))));
+        
+        HomepageSidebar.PopularGamesIcon(driver).click();
         
         log.info("Popular games Icon clicked successfully");
         
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[text()='Popular Games']")));
-        
-        boolean Result = pageObjects.HomepageSidebar.PopularGames(driver).isDisplayed();
+        boolean Result = HomepageSidebar.PopularGames(driver).isDisplayed();
         
         if(Result==true)
         {
@@ -206,20 +217,20 @@ public class HomepageSidebar extends base
         
     }
     @Test(enabled = true,priority=7)
-    public void ProvidersIcon()
+    public void ProvidersIcon() throws IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Providers Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.ProvidersIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("ProvidersIcon"))));
+        
+        HomepageSidebar.ProvidersIcon(driver).click();
         
         log.info("Providers Icon clicked successfully");
-        
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[text()='All Providers']")));
-        
-        boolean Result = pageObjects.HomepageSidebar.AllProvider(driver).isDisplayed();
+  
+        boolean Result = HomepageSidebar.AllProvider(driver).isDisplayed();
         
         if(Result==true)
         {
@@ -235,20 +246,20 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=8)
-    public void SidebarVIPIcon()
+    public void SidebarVIPIcon() throws IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar VIP Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.SidebarVIPIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("SidebarVIPIcon"))));
+        
+        HomepageSidebar.SidebarVIPIcon(driver).click();
         
         log.info("VIP Icon clicked successfully");
-        
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[text()=' VIP Features']")));
-        
-        boolean Result = pageObjects.HomepageSidebar.VIPFeatures(driver).isDisplayed();
+       
+        boolean Result = HomepageSidebar.VIPFeatures(driver).isDisplayed();
         
         if(Result==true)
         {
@@ -264,20 +275,22 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=9)
-    public void SidebarBuyCryptoIcon()
+    public void SidebarBuyCryptoIcon() throws IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Buy Crypto Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.SidebarBuyCryptoIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("SidebarBuyCryptoIcon"))));
+        
+        HomepageSidebar.SidebarBuyCryptoIcon(driver).click();
         
         log.info("Buy Crypto Icon clicked successfully");
         
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[@class='Snackbar__MessagwWrapper-sc-g1jq3j-3 kXhAsS']")));
+      
         
-        String Message = pageObjects.HomepageSidebar.SidebarBuyCryptoMsg(driver).getText();
+        String Message = HomepageSidebar.SidebarBuyCryptoMsg(driver).getText();
         
         System.out.println(Message);
         //VideoRecorder_utlity.stopRecord();
@@ -285,19 +298,22 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=10)
-    public void SidebarLanguageIconEnglish() throws InterruptedException
+    public void SidebarLanguageIconEnglish() throws InterruptedException, IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar First Language Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.SidebarLanguageIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("SidebarLanguageIcon"))));
+        
+        HomepageSidebar.SidebarLanguageIcon(driver).click();
         
         log.info("Language Icon clicked successfully");
         
         Thread.sleep(2000);
         
-         pageObjects.HomepageSidebar.EnglishLanguage(driver).click();
+        HomepageSidebar.EnglishLanguage(driver).click();
         
          log.info("English Language clicked successfully");
          
@@ -306,40 +322,46 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=11)
-    public void SidebarLanguageIconSecondLang() throws InterruptedException
+    public void SidebarLanguageIconSecondLang() throws InterruptedException, IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Second Language Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.SidebarLanguageIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("SidebarLanguageIcon"))));
+        
+        HomepageSidebar.SidebarLanguageIcon(driver).click();
         
         log.info("Language Icon clicked successfully");
         
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         
-         pageObjects.HomepageSidebar.SecondLanguage(driver).click();
-        
-         log.info("Second Language clicked successfully");
+        HomepageSidebar.SecondLanguage(driver).click();
          
-        //VideoRecorder_utlity.stopRecord();
+       log.info("Second Language clicked successfully");
+         
+      //VideoRecorder_utlity.stopRecord();
         
     }
     
     @Test(enabled = true,priority=12)
-    public void SidebarLanguageIconThirdLang() throws InterruptedException
+    public void SidebarLanguageIconThirdLang() throws InterruptedException, IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Third Language Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.SidebarLanguageIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("SidebarLanguageIcon"))));
+        
+        HomepageSidebar.SidebarLanguageIcon(driver).click();
         
         log.info("Language Icon clicked successfully");
         
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         
-         pageObjects.HomepageSidebar.ThirdLanguage(driver).click();
+         HomepageSidebar.ThirdLanguage(driver).click();
         
          log.info("Third Language clicked successfully");
          
@@ -348,19 +370,22 @@ public class HomepageSidebar extends base
     }
     
     @Test(enabled = true,priority=13)
-    public void SidebarLanguageIconFourthLang() throws InterruptedException
+    public void SidebarLanguageIconFourthLang() throws InterruptedException, IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Fourth Language Icon");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.SidebarLanguageIcon(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("SidebarLanguageIcon"))));
+        
+        HomepageSidebar.SidebarLanguageIcon(driver).click();
         
         log.info("Language Icon clicked successfully");
         
         Thread.sleep(2000);
         
-         pageObjects.HomepageSidebar.FourthLanguage(driver).click();
+         HomepageSidebar.FourthLanguage(driver).click();
         
          log.info("Fourth Language clicked successfully");
          
@@ -372,66 +397,58 @@ public class HomepageSidebar extends base
     @Test(enabled = true,priority=14)
     public void SidebarLiveChatIcon() throws InterruptedException
     {
-        //VideoRecorder_utlity.startRecord("Sidebar live Chat Icon");
-        
-        wait = new WebDriverWait(driver, 50);
-        
-        pageObjects.HomepageSidebar.SidebarArrowOut(driver).click();
-        
-        log.info("Sidebar Arrow Out button clicked successfully");
-        
-        WebElement LiveChat = pageObjects.HomepageSidebar.SidebarLivechatIcon(driver);
-        
-        Actions action = new Actions(driver);
-        
-        
-        try
-        {
-            action.moveToElement(LiveChat).click().perform();
-        }
-        catch(Exception e)
-        {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            
-            js.executeScript("arguments[0].click", LiveChat);
-            
-            //pageObjects.HomepageSidebar.SidebarLivechatIcon(driver).click();
-        }
-        
-        
-        
-        
-//      Thread.sleep(2000);
-//      
-//      action.moveToElement(LiveChat).click().perform();
-        
-        log.info("Live Chat Icon clicked successfully");
-        
-        Thread.sleep(8000);
-        
-//      String Message = pageObjects.HomepageSidebar.LivechatPopUp(driver).getText();
-    
-//      System.out.println(Message);
-    
-    
-        //VideoRecorder_utlity.stopRecord();
-        
+    	driver.navigate().to("https://pojy67209hjyfrthuopvshcnqoclpn.flush.com/");
+		// driver.navigate.to("");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		boolean searchIconPresence = driver
+				.findElement(By.xpath("(//*[@class='Sidebar__WrapLowerEl-sc-nzv22c-8 bgWSwr'])[1]")).isDisplayed();
+		boolean searchIconEnabled = driver
+				.findElement(By.xpath("(//*[@class='Sidebar__WrapLowerEl-sc-nzv22c-8 bgWSwr'])[1]")).isEnabled();
+    	
+    	WebElement searchIcon = driver
+    			.findElement(By.xpath("(//*[@class='Sidebar__WrapLowerEl-sc-nzv22c-8 bgWSwr'])[1]"));
+    		
+    		
+    		
+    		while (searchIcon.isDisplayed()) {
+    			
+    			Thread.sleep(5000);
+    			
+    			searchIcon.click();
+    			
+    			System.out.println("1234");
+    			WebElement chaticon = driver
+    					.findElement(By.xpath("//*[@class='cc-1jpm']"));
+    			
+    			if(chaticon.isDisplayed())
+    			{
+    				break;
+    			}
+    				
+    			
+    		}
     }
     
+    
     @Test(enabled = true,priority=15)
-    public void SidebarArrow() throws InterruptedException
+    public void SidebarArrow() throws InterruptedException, IOException
     {
         //VideoRecorder_utlity.startRecord("Sidebar Arrow");
         
         wait = new WebDriverWait(driver, 50);
         
-        pageObjects.HomepageSidebar.SidebarArrowOut(driver).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("SidebarArrowOut"))));
+        
+        HomepageSidebar.SidebarArrowOut(driver).click();
         
         log.info("Sidebar Arrow Out button clicked successfully");
         
-        Thread.sleep(4000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(f.SidebarProperty("SidebarArrowIn"))));
         
-        pageObjects.HomepageSidebar.SidebarArrowIn(driver).click();
+        HomepageSidebar.SidebarArrowIn(driver).click();
         
         log.info("Sidebar Arrow In button clicked successfully");
         
@@ -440,9 +457,11 @@ public class HomepageSidebar extends base
     }
     
     @AfterMethod
-	public void EndTest() {
+	public void EndTest() throws InterruptedException
+    {
+    	Thread.sleep(2000);
 		
-		driver.close();
+//		driver.close();
 
 		log.info("Browser closed");
 	}

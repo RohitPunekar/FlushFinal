@@ -191,13 +191,13 @@ import org.openqa.selenium.WebElement;
     {
         return driver.findElement(By.xpath("(//*[@class='IconGetters__Wrapper-sc-jp6spq-1 ZDNFx'])[1]"));
     }
-    public static WebElement PlinkoGameFairnessServerSeed(WebDriver driver)
-    {
-        return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 bcESjD'])[1]"));
-    }
-    public static WebElement PlinkoGameFairnessServerSeedHashed(WebDriver driver)
+    public static WebElement PlinkoGameFairnessActiveServerSeed(WebDriver driver)
     {
         return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 bcESjD'])[2]"));
+    }
+    public static WebElement PlinkoGameFairnessNextServerSeed(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 bcESjD'])[4]"));
     }
     public static WebElement PlinkoGameFairnessVerifyBet(WebDriver driver)
     {

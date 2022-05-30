@@ -16,6 +16,12 @@ public class WheelGamePage {
 	}
 	
 	
+	
+	
+	public static WebElement WheelGameMaxBalanceError(WebDriver driver) {
+		return driver.findElement(By.xpath("//*[@class='Tooltip__TooltipMessage-sc-lnycwz-2 bymWBZ']"));
+	}
+	
 	public static WebElement WheelLink(WebDriver driver) {
 		return driver.findElement(By.xpath("(//*[@class='GameCard__WrapperGame-sc-g0x5h9-0 JmqfD'])[4]"));
 	}
@@ -127,18 +133,48 @@ public class WheelGamePage {
 	public static WebElement BetPopup(WebDriver driver) {
 		return driver.findElement(By.xpath("//*[text()='You must rotate your seed pair in order to verify this bet']"));
 	}
-
+	
+	 public static WebElement WheelGameFairnessTransactionsRow(WebDriver driver)
+	    {
+	        return driver.findElement(By.xpath("(//*[@class='IconGetters__Wrapper-sc-jp6spq-1 ZDNFx'])[1]"));
+	    }
+	
+	public static WebElement WheelGameFairnessGoToTransaction(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("//*[@class='FairnessSection__LinkButton-sc-e5o9ot-4 eSVxxu']"));
+    }
+	
 	public static WebElement FAIRNESSChangeButton(WebDriver driver) {
 		return driver.findElement(By.xpath("//*[text()='CHANGE']"));
 	}
 
-	public static WebElement FAIRNESSActiveserverseed(WebDriver driver) {
-		return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 cKzgzb'])[2]"));
-	}
-
-	public static WebElement FAIRNESSNextserverseed(WebDriver driver) {
-		return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 cKzgzb'])[4]"));
-	}
+	public static WebElement WheelGameFairnessServerSeed(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 bcESjD'])[1]"));
+    }
+    public static WebElement WheelGameFairnessServerSeedHashed(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("(//*[@class='CustomInput__MainInput-sc-1o4ngjx-6 bcESjD'])[2]"));
+    }
+    public static WebElement WheelGameFairnessVerifyBet(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("//*[text()='Verify Bet']"));
+    }
+    
+    public static WebElement WheelGameFairnessRiskTab(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("(//*[@class='CustomDropdown__DropDownButton-sc-1hmifsq-2 gBAQOB'])[2]"));
+    }
+    
+    public static WebElement WheelGameFairnessRowsTab(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("(//*[@class='CustomDropdown__DropDownButton-sc-1hmifsq-2 gBAQOB'])[3]"));
+    }
+    
+    public static WebElement WheelGameFairnessGameTab(WebDriver driver)
+    {
+        return driver.findElement(By.xpath("(//*[@class='CustomDropdown__DropDownButton-sc-1hmifsq-2 gBAQOB'])[1]"));
+    }
 
 	public static WebElement HalfAmount(WebDriver driver) {
 		return driver.findElement(By.xpath("(//*[@class='WheelSidebar__InputButtonV1-sc-1rlsfe2-7 dDdbIi'])[1]"));
@@ -171,4 +207,10 @@ public class WheelGamePage {
 	public static WebElement NoOfBETSButton(WebDriver driver) {
 		return driver.findElement(By.xpath("(//*[@class='LabelInput__InnerContent-sc-zkip7h-5 lhNgjS']/input)[2]"));
 	}
+	
+	public static WebElement WheelGameLiveStatsPopUp(WebDriver driver) {
+		return driver.findElement(By.xpath("//*[@class='LiveStatsModal__StatsCardsWrapper-sc-gafewh-4 bIhfOt']"));
+	}
+	
+	
 }

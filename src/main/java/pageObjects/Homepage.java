@@ -177,9 +177,9 @@ public class Homepage {
 
 	public void Login(WebDriver driver) throws IOException {
 
-		WelcomePopup.Welcomeemail(driver).sendKeys("satishkumar@rapidinnovation.dev");
+		WelcomePopup.Welcomeemail(driver).sendKeys("madhuri@rapidinnovation.dev");
 
-		WelcomePopup.Welcomepassword(driver).sendKeys("Satvik@123");
+		WelcomePopup.Welcomepassword(driver).sendKeys("Madhuri@79");
 
 		WelcomePopup.Welcomeplaynow(driver).click();
 	}
