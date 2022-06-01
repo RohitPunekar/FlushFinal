@@ -369,7 +369,9 @@ public class DashBoardpageTestCases extends base {
 	}
 
 	@AfterMethod
-	public void EndTest() {
+	public void EndTest() throws InterruptedException {
+		Thread.sleep(2000);
+		
 		driver.close();
 
 		log.info("Browser closed");

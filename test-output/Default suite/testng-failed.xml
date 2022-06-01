@@ -3,30 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.Test.PlinkoGameTestCases">
+      <class name="com.Test.CrashGameTestCases">
         <methods>
-          <include name="PlinkoGameAutoBetTabWithLowRiskInfinite"/>
-          <include name="closeBrowser"/>
+          <include name="CrashGameAutoHalfAmount"/>
+          <include name="EndTest"/>
           <include name="Initialization"/>
-          <include name="PlinkoGameAutoHalfAmountWithMediumRisk"/>
-          <include name="PlinkoGameHalfAmountWithHighRisk"/>
-          <include name="PlinkoGameAutoDoubleAmountWithLowRisk"/>
-          <include name="PlinkoGameAutoHalfAmountWithLowRisk"/>
-          <include name="PlinkoGameDoubleAmountWithMediumRisk"/>
-          <include name="PlinkoGameHalfAmountWithMediumRisk"/>
-          <include name="PlinkoGameHalfAmountWithLowRisk"/>
-          <include name="PlinkoGameBetFullFlowcheckingWithRiskLow"/>
-          <include name="PlinkoGameDoubleAmountWithHighRisk"/>
-          <include name="PlinkoGameBetFullFlowcheckingWithRiskHigh"/>
-          <include name="PlinkoGameAutoBetTabWithLowRisk"/>
-          <include name="PlinkoGameAutoBetTabWithMediumRisk"/>
-          <include name="PlinkoGameAutoDoubleAmountWithMediumRisk"/>
-          <include name="PlinkoGameAutoDoubleAmountWithHighRisk"/>
-          <include name="PlinkoGameBetFullFlowcheckingWithRiskMedium"/>
-          <include name="PlinkoGameDoubleAmountWithLowRisk"/>
-          <include name="PlinkoGameAutoHalfAmountWithHighRisk"/>
         </methods>
-      </class> <!-- com.Test.PlinkoGameTestCases -->
+      </class> <!-- com.Test.CrashGameTestCases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

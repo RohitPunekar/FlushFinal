@@ -51,13 +51,13 @@
 
  <test thread-count="10" name="WalletModuleTest">
     <classes>
-      <class name="com.Test.WalletModule"/>
+      <class name="com.Test.WalletModuleTestCase"/>
     </classes>
   </test> <!-- Test -->
 
 <test thread-count="10" name="HomepageSidebarTest">
     <classes>
-      <class name="com.Test.HomepageSidebar"/>
+      <class name="com.Test.HomepageSidebarTestcases"/>
     </classes>
   </test> <!-- Test -->
 

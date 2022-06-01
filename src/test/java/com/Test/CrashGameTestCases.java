@@ -615,7 +615,6 @@ public class CrashGameTestCases extends base {
 		page.Login(driver);
 
 		log.info("Login Successfully with valid username and valid Password ");
-		;
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserDropdown"))));
 
@@ -1308,7 +1307,7 @@ public class CrashGameTestCases extends base {
 	}
 
 	@Test(enabled = true, priority = 12)
-	public void CrashGameAutoNumberOfBetsTwo() throws Exception {
+	public void CrashGameAutoNumberOfBets() throws Exception {
 
 		// VideoRecorder_utlity.startRecord("WheelGame Auto Number Of Bets Two");
 
@@ -1386,15 +1385,15 @@ public class CrashGameTestCases extends base {
 
 		log.info("Deleted default amount successfully");
 
-		Amount.sendKeys("0.00000010");
+		Amount.sendKeys("0.00000002");
 
 		log.info("Entering some amount successfully");
 
-		Double BetAmount = 0.00000010;
+		Double BetAmount = 0.00000002;
 
 		CrashGamePage.AutoNoOfBets(driver).sendKeys("1");
 
-		log.info("1 Number of Bets Entered Successfully");
+		log.info("1 Number of Bet Entered Successfully");
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.CrashProperty("StartAutobet"))));
 
@@ -1447,8 +1446,11 @@ public class CrashGameTestCases extends base {
 		System.out.println("-------------------------------------------");
 
 		if (WalletAmountAfterBET > WalletAmount) {
+			
 			System.out.println("User is in profit");
+			
 		} else if (TotalBalanceAfterBET.equals(Totalmoney)) {
+			
 			System.out.println("No Profit No Loss");
 		} else {
 			System.out.println("User is in Loss");
@@ -1457,11 +1459,171 @@ public class CrashGameTestCases extends base {
 		System.out.println("Test case passed");
 
 		// VideoRecorder_utlity.stopRecord();
+	}
+	
+	@Test(enabled = true, priority = 13)
+	public void CrashGameAutoHalfAmount() throws Exception {
 
+		// VideoRecorder_utlity.startRecord("WheelGame Auto Number Of Bets Two");
+
+		Homepage page = new Homepage(driver);
+
+		wait = new WebDriverWait(driver, 100);
+
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Loginbutton"))));
+
+			Homepage.Loginbutton(driver).click();
+		} catch (Exception e) {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("Relogin"))));
+
+			Homepage.ReLoginbutton(driver).click();
+		}
+
+		log.info("Login button clicked successfully");
+
+		page.Login(driver);
+
+		log.info("Login Successfully with valid username and valid Password ");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.LoginProperty("UserDropdown"))));
+
+		log.info("Wallet Button Visible Successfully on Dashboard Page");
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		WebElement OriginalsHeader = Homepage.FlushOriginalsHeader(driver);
+
+		js.executeScript("arguments[0].scrollIntoView();", OriginalsHeader);
+
+		log.info("Scrolling up to originals header");
+
+		Thread.sleep(4000);
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.CrashProperty("CrashLink"))));
+
+		CrashGamePage.CrashLink(driver).click();
+
+		log.info("Crash game link clicked successfully");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.CrashProperty("CrashCanvas"))));
+
+		WebElement Walletbalance = Homepage.WalletBalanceDropdown(driver);
+
+		String Totalmoney = Walletbalance.getAttribute("innerText");
+
+		System.out.println("TotalBalance =" + Totalmoney);
+
+		log.info("Getting Wallet Balance Successfully ");
+
+		double WalletAmount = new Double(Totalmoney);
+
+		log.info("String Value Converting into Decimal");
+
+		BigDecimal DashboardWalletAmount = BigDecimal.valueOf(WalletAmount);
+
+		System.out.println("Total Amount in your wallet =  " + DashboardWalletAmount);
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.CrashProperty("AUTO"))));
+
+		CrashGamePage.AutoButton(driver).click();
+
+		log.info("AUTO Button Clicked Successfully ");
+
+		WebElement Amount = CrashGamePage.BetAmountinputField(driver);
+
+		Amount.sendKeys(Keys.CONTROL, "a");
+
+		log.info("Selecting all default amount successfully");
+
+		Amount.sendKeys(Keys.DELETE);
+
+		log.info("Deleted default amount successfully");
+
+		Amount.sendKeys("0.00000004");
+
+		log.info("Entering some amount successfully");
+
+		Double BetAmount = 0.00000004;
+		
+		CrashGamePage.HalfxButton(driver).click();
+
+		log.info("Clicked on 1/2 button Successfully");
+
+		CrashGamePage.AutoNoOfBets(driver).sendKeys("1");
+
+		log.info("1 Number of Bet Entered Successfully");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.CrashProperty("StartAutobet"))));
+
+		CrashGamePage.StartAutoBet(driver).click();
+
+		log.info("Start Auto Button Clicked Successfully");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(f.CrashProperty("CrashGameScore1"))));
+
+		System.out.println(CrashGamePage.CrashGameResult1(driver).getText());
+
+		WebElement Statistics = CrashGamePage.MyBets(driver);
+
+		js.executeScript("arguments[0].scrollIntoView();", Statistics);
+
+		CrashGamePage.MyBets(driver).click();
+
+		Thread.sleep(4000);
+
+		WebElement Payout = CrashGamePage.PayoutCrashGame(driver);
+
+		String PayoutAmt = Payout.getAttribute("innerText");
+
+		log.info("Getting Payout Successfully through string format");
+
+		System.out.println("Payout  =" + PayoutAmt);
+
+		double PayoutAmount = Double.parseDouble(PayoutAmt);
+
+		System.out.println("PayoutAmount =" + PayoutAmount);
+
+		WebElement walletBalanceAfterBET = Homepage.WalletBalanceDropdown(driver);
+
+		String TotalBalanceAfterBET = walletBalanceAfterBET.getAttribute("innerText");
+
+		// System.out.println("TotalBalance ="+TotalBalanceAfterBET);
+
+		log.info("Getting Wallet Balance Successfully ");
+
+		double WalletAmountAfterBET = new Double(TotalBalanceAfterBET);
+
+		log.info("String Value Converting into Decimal");
+
+		BigDecimal DashboardWalletAmountAfterBET = BigDecimal.valueOf(WalletAmountAfterBET);
+
+		System.out.println("Total Amount in you wallet After BET=  " + DashboardWalletAmountAfterBET);
+
+		log.info("Converting string Payout Amount into number successfully");
+
+		System.out.println("-------------------------------------------");
+
+		if (WalletAmountAfterBET > WalletAmount) {
+			
+			System.out.println("User is in profit");
+			
+		} else if (TotalBalanceAfterBET.equals(Totalmoney)) {
+			
+			System.out.println("No Profit No Loss");
+		} else {
+			System.out.println("User is in Loss");
+		}
+
+		System.out.println("Test case passed");
+
+		// VideoRecorder_utlity.stopRecord();
 	}
 
 	@AfterMethod
-	public void EndTest() {
+	public void EndTest() throws InterruptedException {
+		Thread.sleep(2000);
+		
 		driver.close();
 
 		log.info("Browser closed");

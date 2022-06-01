@@ -405,7 +405,8 @@ public class HomepageFooter extends base {
 	}
 	
 	@AfterMethod
-	public void EndTest() {
+	public void EndTest() throws InterruptedException {
+		Thread.sleep(2000);
 		
 		driver.quit();
 

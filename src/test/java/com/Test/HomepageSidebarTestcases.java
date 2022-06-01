@@ -397,37 +397,46 @@ public class HomepageSidebarTestcases extends base
     @Test(enabled = true,priority=14)
     public void SidebarLiveChatIcon() throws InterruptedException
     {
+    	//VideoRecorder_utlity.startRecord("Sidebar live Chat Icon");
+    	
     	driver.navigate().to("https://pojy67209hjyfrthuopvshcnqoclpn.flush.com/");
+    	
 		// driver.navigate.to("");
+    	
 		driver.manage().window().maximize();
+		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
 		boolean searchIconPresence = driver
 				.findElement(By.xpath("(//*[@class='Sidebar__WrapLowerEl-sc-nzv22c-8 bgWSwr'])[1]")).isDisplayed();
+		
 		boolean searchIconEnabled = driver
 				.findElement(By.xpath("(//*[@class='Sidebar__WrapLowerEl-sc-nzv22c-8 bgWSwr'])[1]")).isEnabled();
-    	
-    	WebElement searchIcon = driver
-    			.findElement(By.xpath("(//*[@class='Sidebar__WrapLowerEl-sc-nzv22c-8 bgWSwr'])[1]"));
-    		
-    		
-    		
-    		while (searchIcon.isDisplayed()) {
-    			
-    			Thread.sleep(5000);
-    			
-    			searchIcon.click();
-    			
-    			System.out.println("1234");
-    			WebElement chaticon = driver
-    					.findElement(By.xpath("//*[@class='cc-1jpm']"));
-    			
-    			if(chaticon.isDisplayed())
-    			{
-    				break;
-    			}
-    				
-    			
-    		}
+		
+        WebElement searchIcon = driver.findElement(By.xpath("(//*[@class='Sidebar__WrapLowerEl-sc-nzv22c-8 bgWSwr'])[1]"));
+        
+        while(searchIcon.isDisplayed())
+        {
+        	Thread.sleep(7000);
+        	
+        	searchIcon.click();
+        	
+        	System.out.println("----");
+        	
+        	//Thread.sleep(5000);
+        	
+        	WebElement ChatIcon=driver.findElement(By.xpath("//*[@class='cc-1jpm']"));
+        	
+        	Thread.sleep(2000);
+        	
+        	if(ChatIcon.isDisplayed())
+        	{
+        		break;
+        	}
+        }
+        System.out.println("done");
+        
+      //VideoRecorder_utlity.stopRecord();
     }
     
     
@@ -461,7 +470,7 @@ public class HomepageSidebarTestcases extends base
     {
     	Thread.sleep(2000);
 		
-//		driver.close();
+		driver.close();
 
 		log.info("Browser closed");
 	}
